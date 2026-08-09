@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { ThemeScript } from "@/components/layout/theme-script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -34,6 +35,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} h-full`} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground antialiased selection:bg-e300 selection:text-e900">
         <SmoothScroll>
           <ScrollProgress />

@@ -5,12 +5,14 @@ import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const links = [
   { href: "#platform", label: "Platform" },
   { href: "#capture", label: "Capture" },
   { href: "#engage", label: "Engage" },
+  { href: "#scale", label: "Scale" },
   { href: "#insights", label: "Insights" },
   { href: "#trust", label: "Trust" },
 ];
@@ -68,6 +70,7 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
           <Button href="#demo" variant="ghost" size="sm">
             Sign in
           </Button>
@@ -76,13 +79,16 @@ export function Navbar() {
           </Button>
         </div>
 
-        <button
-          className="flex h-9 w-9 items-center justify-center rounded-r-sm text-fg md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            className="flex h-9 w-9 items-center justify-center rounded-r-sm text-fg"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>

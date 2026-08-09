@@ -156,6 +156,24 @@ body {
   color: var(--e900);
 }
 
+.theme-icon-moon {
+  display: none;
+}
+:root[data-theme="dark"] .theme-icon-sun {
+  display: none;
+}
+:root[data-theme="dark"] .theme-icon-moon {
+  display: inline-flex;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-icon-sun {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .theme-icon-moon {
+    display: inline-flex;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

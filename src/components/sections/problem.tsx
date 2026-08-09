@@ -1,51 +1,84 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { RevealGroup, RevealItem } from "@/components/ui/reveal";
-import { Layers, Puzzle, ShieldAlert } from "lucide-react";
+import { Reveal } from "@/components/ui/reveal";
+import { Layers, Puzzle, ArrowDown } from "lucide-react";
 
 const stack = [
-  { label: "CDP", desc: "customer data platform" },
-  { label: "Marketing automation", desc: "email & campaign tools" },
-  { label: "CPaaS", desc: "SMS / WhatsApp APIs" },
-  { label: "Chatbot tool", desc: "bolted onto the widget" },
-  { label: "Contact centre", desc: "separate agent desktop" },
-  { label: "BI layer", desc: "dashboards, after the fact" },
+  { label: "CDP", desc: "customer data platform", offset: { x: -18, y: -10 } },
+  { label: "Marketing automation", desc: "email & campaign tools", offset: { x: 14, y: -16 } },
+  { label: "CPaaS", desc: "SMS / WhatsApp APIs", offset: { x: -22, y: 6 } },
+  { label: "Chatbot tool", desc: "bolted onto the widget", offset: { x: 20, y: 4 } },
+  { label: "Contact centre", desc: "separate agent desktop", offset: { x: -14, y: 18 } },
+  { label: "BI layer", desc: "dashboards, after the fact", offset: { x: 16, y: 20 } },
 ];
 
 export function Problem() {
-  return (
-    <section className="relative py-28 sm:py-36" id="platform">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <SectionHeading
-          eyebrow="Why saqi.ai"
-          title="Six tools, six logins, one broken picture of the customer"
-          description="Every stitched-together stack loses the same thing: a single, trustworthy, real-time view of who your customer is and what they need next."
-        />
+  const ref = useRef<HTMLDivElement>(null);
+  const [converge, setConverge] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-          <RevealGroup className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2">
-            {stack.map((s) => (
-              <RevealItem key={s.label}>
-                <div className="flex h-full flex-col justify-between gap-3 rounded-r border border-border bg-surface p-5 opacity-80 transition-opacity hover:opacity-100">
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setConverge(Math.min(1, Math.max(0, v * 1.5)));
+  });
+
+  return (
+    <section ref={ref} id="platform" className="relative" style={{ height: "220vh" }}>
+      <div className="sticky top-0 flex min-h-screen items-center overflow-hidden py-24">
+        <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
+          <SectionHeading
+            eyebrow="Why saqi.ai"
+            title="Six tools, six logins, one broken picture of the customer"
+            description="Every stitched-together stack loses the same thing: a single, trustworthy, real-time view of who your customer is and what they need next. Scroll — watch it collapse into one."
+          />
+
+          <div className="mt-16 grid gap-6 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2">
+              {stack.map((s) => (
+                <motion.div
+                  key={s.label}
+                  style={{
+                    transform: `translate(${s.offset.x * converge}px, ${s.offset.y * converge}px) scale(${1 - converge * 0.12})`,
+                    opacity: 1 - converge * 0.75,
+                  }}
+                  className="flex h-full flex-col justify-between gap-3 rounded-r border border-border bg-surface p-5"
+                >
                   <Puzzle className="h-4 w-4 text-fg-dim" />
                   <div>
                     <p className="text-sm font-semibold text-fg">{s.label}</p>
                     <p className="text-xs text-fg-dim">{s.desc}</p>
                   </div>
-                </div>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-
-          <div className="flex items-center justify-center py-4 lg:py-0">
-            <div className="flex flex-col items-center gap-2 text-fg-dim">
-              <ShieldAlert className="h-6 w-6" />
-              <span className="text-xs font-medium uppercase tracking-wider">becomes</span>
+                </motion.div>
+              ))}
             </div>
-          </div>
 
-          <RevealItem>
-            <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-r border border-primary/30 bg-gradient-to-b from-primary-soft to-surface p-8">
-              <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-e300/30 blur-3xl" />
+            <div className="flex items-center justify-center py-4 lg:py-0">
+              <motion.div
+                animate={{ rotate: converge > 0.5 ? 90 : 0 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col items-center gap-2 text-fg-dim"
+              >
+                <ArrowDown className="h-6 w-6 lg:-rotate-90" />
+                <span className="text-xs font-medium uppercase tracking-wider">becomes</span>
+              </motion.div>
+            </div>
+
+            <motion.div
+              style={{
+                transform: `scale(${0.94 + converge * 0.06})`,
+                boxShadow: `0 ${20 + converge * 20}px ${50 + converge * 40}px -25px rgba(5,150,105,${0.15 + converge * 0.25})`,
+              }}
+              className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-r border border-primary/30 bg-gradient-to-b from-primary-soft to-surface p-8"
+            >
+              <div
+                className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-e300/30 blur-3xl transition-opacity duration-300"
+                style={{ opacity: 0.4 + converge * 0.6 }}
+              />
               <Layers className="h-6 w-6 text-primary" />
               <div>
                 <p className="text-xl font-semibold text-fg">One platform</p>
@@ -56,15 +89,25 @@ export function Problem() {
               </div>
               <ul className="flex flex-col gap-2 text-sm text-fg-muted">
                 {["Single customer profile", "Real-time event log", "One compliance gate for every send"].map(
-                  (t) => (
-                    <li key={t} className="flex items-center gap-2">
+                  (t, i) => (
+                    <motion.li
+                      key={t}
+                      style={{ opacity: Math.min(1, Math.max(0, converge * 3 - i * 0.4)) }}
+                      className="flex items-center gap-2"
+                    >
                       <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {t}
-                    </li>
+                    </motion.li>
                   )
                 )}
               </ul>
-            </div>
-          </RevealItem>
+            </motion.div>
+          </div>
+
+          <Reveal delay={0.1} className="mt-10">
+            <p className="text-center text-xs font-medium uppercase tracking-wider text-fg-dim">
+              {converge < 0.95 ? "Keep scrolling" : "One profile. Every channel. Real time."}
+            </p>
+          </Reveal>
         </div>
       </div>
     </section>
