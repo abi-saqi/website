@@ -5,6 +5,7 @@
     "jsx": "preserve",
     "allowJs": true,
     "noEmit": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }

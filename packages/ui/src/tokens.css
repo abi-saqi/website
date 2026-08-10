@@ -42,4 +42,99 @@
 
   --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --background: var(--bg);
+  --foreground: var(--fg);
+}
+
+:root[data-theme="dark"] {
+  --bg: #06100c;
+  --surface: #0b1712;
+  --elevated: #0f1e18;
+  --raised: #13251e;
+  --border: #1b3129;
+  --border-strong: #254539;
+  --fg: #eef7f2;
+  --fg-muted: #9db3aa;
+  --fg-dim: #6c8579;
+  --primary: var(--e500);
+  --primary-hi: var(--e400);
+  --primary-soft: rgba(16, 185, 129, 0.12);
+  --background: var(--bg);
+  --foreground: var(--fg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #06100c;
+    --surface: #0b1712;
+    --elevated: #0f1e18;
+    --raised: #13251e;
+    --border: #1b3129;
+    --border-strong: #254539;
+    --fg: #eef7f2;
+    --fg-muted: #9db3aa;
+    --fg-dim: #6c8579;
+    --primary: var(--e500);
+    --primary-hi: var(--e400);
+    --primary-soft: rgba(16, 185, 129, 0.12);
+    --background: var(--bg);
+    --foreground: var(--fg);
+  }
+}
+
+* {
+  border-color: var(--border);
+}
+
+.font-mono-tabular {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--e300);
+  color: var(--e900);
+}
+
+.theme-icon-moon {
+  display: none;
+}
+:root[data-theme="dark"] .theme-icon-sun {
+  display: none;
+}
+:root[data-theme="dark"] .theme-icon-moon {
+  display: inline-flex;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-icon-sun {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .theme-icon-moon {
+    display: inline-flex;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
