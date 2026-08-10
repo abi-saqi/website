@@ -1,0 +1,45 @@
+/**
+ * The emerald design-token system — the single accent family shared by
+ * every saqi.ai surface (website, console, agent desktop, widget host pages).
+ * Do not introduce ad-hoc hex values in components; extend this file instead.
+ */
+:root {
+  --e50: #ecfdf5;
+  --e100: #d1fae5;
+  --e200: #a7f3d0;
+  --e300: #6ee7b7;
+  --e400: #34d399;
+  --e500: #10b981;
+  --e600: #059669;
+  --e700: #047857;
+  --e800: #065f46;
+  --e900: #064e3b;
+  --teal: #0d9488;
+  --teal-dk: #0f766e;
+
+  --bg: #f3f5f4;
+  --surface: #ffffff;
+  --elevated: #f7f9f8;
+  --raised: #edf1ef;
+
+  --border: #e2e7e4;
+  --border-strong: #c9d2cd;
+
+  --fg: #111917;
+  --fg-muted: #5a6b64;
+  --fg-dim: #8a968f;
+
+  --primary: var(--e600);
+  --primary-hi: var(--e700);
+  --primary-soft: var(--e50);
+
+  --amber: #b45309;
+  --rose: #be123c;
+  --slate: #64748b;
+
+  --r: 10px;
+  --r-sm: 6px;
+
+  --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+}
