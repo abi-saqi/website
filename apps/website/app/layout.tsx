@@ -38,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <ThemeScript />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-foreground antialiased selection:bg-e300 selection:text-e900">
+      <body className="grain min-h-full flex flex-col bg-background text-foreground antialiased selection:bg-e300 selection:text-e900">
         <SmoothScroll>
           <ScrollProgress />
           <Navbar />
