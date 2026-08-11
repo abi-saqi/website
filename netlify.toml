@@ -1,0 +1,11 @@
+[build]
+  base = "/"
+  command = "pnpm turbo run build --filter=@saqi/website"
+  publish = "apps/website/out"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Pure static export (output: "export" in apps/website/next.config.mjs) —
+  # skip Netlify's Next.js Runtime plugin, which is built for SSR/ISR and
+  # otherwise auto-attaches itself and reshapes the output.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
