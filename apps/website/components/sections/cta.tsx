@@ -2,9 +2,11 @@
 
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
+import { useLeadModal } from "@/components/providers/lead-modal-provider";
 import { ArrowRight, CalendarCheck } from "lucide-react";
 
 export function CTA() {
+  const { openDemo, openSales } = useLeadModal();
   return (
     <section id="demo" className="relative overflow-hidden py-28 sm:py-36">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,var(--primary-soft),transparent)]" />
@@ -22,10 +24,10 @@ export function CTA() {
               you what moves to saqi.ai on day one and what stays behind.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button size="lg">
+              <Button size="lg" onClick={openDemo}>
                 Book a demo <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={openSales}>
                 Talk to sales
               </Button>
             </div>

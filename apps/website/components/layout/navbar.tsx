@@ -6,6 +6,7 @@ import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { useLeadModal } from "@/components/providers/lead-modal-provider";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -21,6 +22,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
+  const { openDemo } = useLeadModal();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 24);
@@ -72,7 +74,7 @@ export function Navbar() {
           <Button href="/#demo" variant="ghost" size="sm">
             Sign in
           </Button>
-          <Button href="/#demo" size="sm">
+          <Button onClick={openDemo} size="sm">
             Book a demo
           </Button>
         </div>
@@ -112,7 +114,13 @@ export function Navbar() {
               <Button href="/#demo" variant="outline" size="sm">
                 Sign in
               </Button>
-              <Button href="/#demo" size="sm">
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                  openDemo();
+                }}
+                size="sm"
+              >
                 Book a demo
               </Button>
             </div>

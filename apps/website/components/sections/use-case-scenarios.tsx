@@ -1,5 +1,8 @@
+"use client";
+
 import { RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
+import { useLeadModal } from "@/components/providers/lead-modal-provider";
 import { Camera, Megaphone, Phone, ArrowRight, X, Check } from "lucide-react";
 
 const scenarios = [
@@ -24,11 +27,12 @@ const scenarios = [
 ];
 
 export function UseCaseScenarios() {
+  const { openDemo } = useLeadModal();
   return (
     <RevealGroup className="grid gap-5 lg:grid-cols-3">
       {scenarios.map((s) => (
         <RevealItem key={s.setup}>
-          <TiltCard className="flex h-full flex-col gap-5 p-6" strength={5}>
+          <TiltCard className="flex h-full flex-col gap-5 p-6" strength={5} onClick={openDemo}>
             <div className="flex items-center gap-3">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-r-sm bg-primary-soft text-primary">
                 <s.icon className="h-5 w-5" />

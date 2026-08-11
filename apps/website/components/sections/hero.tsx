@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { ArrowRight, PlayCircle, MessageCircle, TrendingUp, ShieldCheck, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useLeadModal } from "@/components/providers/lead-modal-provider";
 
 const floatingCards = [
   {
@@ -38,6 +39,7 @@ const floatingCards = [
 ];
 
 export function Hero() {
+  const { openDemo } = useLeadModal();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -137,7 +139,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
         >
-          <Button href="#demo" size="lg">
+          <Button onClick={openDemo} size="lg">
             Book a demo <ArrowRight className="h-4 w-4" />
           </Button>
           <Button href="#platform" variant="outline" size="lg">

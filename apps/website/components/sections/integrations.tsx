@@ -15,14 +15,14 @@ import {
 } from "lucide-react";
 
 const integrations = [
-  { icon: Cloud, name: "Salesforce", category: "CRM" },
-  { icon: Orbit, name: "HubSpot", category: "CRM" },
-  { icon: Grid2x2, name: "Zoho", category: "CRM" },
-  { icon: ShoppingBag, name: "Shopify", category: "Commerce" },
-  { icon: Megaphone, name: "Google Ads", category: "Ads" },
-  { icon: Target, name: "Meta Ads", category: "Ads" },
-  { icon: Zap, name: "Zapier", category: "Automation" },
-  { icon: GitBranch, name: "Segment", category: "Data" },
+  { icon: Cloud, name: "Salesforce", category: "CRM", chip: "bg-[#00A1E0]/14 text-[#00A1E0]" },
+  { icon: Orbit, name: "HubSpot", category: "CRM", chip: "bg-[#FF7A59]/14 text-[#FF7A59]" },
+  { icon: Grid2x2, name: "Zoho", category: "CRM", chip: "bg-rose/14 text-rose" },
+  { icon: ShoppingBag, name: "Shopify", category: "Commerce", chip: "bg-[#95BF47]/16 text-[#5E8E3E]" },
+  { icon: Megaphone, name: "Google Ads", category: "Ads", chip: "bg-[#F59E0B]/14 text-[#B45309]" },
+  { icon: Target, name: "Meta Ads", category: "Ads", chip: "bg-[#0866FF]/12 text-[#0866FF]" },
+  { icon: Zap, name: "Zapier", category: "Automation", chip: "bg-[#FF4A00]/14 text-[#FF4A00]" },
+  { icon: GitBranch, name: "Segment", category: "Data", chip: "bg-teal/14 text-teal-dk" },
 ];
 
 export function Integrations() {
@@ -39,7 +39,7 @@ export function Integrations() {
           {integrations.map((it) => (
             <RevealItem key={it.name}>
               <TiltCard className="flex h-full flex-col items-center gap-3 p-6 text-center" strength={5}>
-                <span className="flex h-11 w-11 items-center justify-center rounded-r-sm bg-primary-soft text-primary">
+                <span className={`flex h-11 w-11 items-center justify-center rounded-r-sm ${it.chip}`}>
                   <it.icon className="h-5 w-5" />
                 </span>
                 <div>

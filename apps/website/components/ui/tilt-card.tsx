@@ -9,11 +9,13 @@ export function TiltCard({
   className,
   glass = true,
   strength = 8,
+  onClick,
 }: {
   children: React.ReactNode;
   className?: string;
   glass?: boolean;
   strength?: number;
+  onClick?: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0.5);
@@ -45,10 +47,24 @@ export function TiltCard({
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
       style={{ rotateX, rotateY, transformPerspective: 800 }}
       className={cn(
         "spotlight relative rounded-r transition-colors duration-300",
         glass ? "glass" : "border border-border bg-surface",
+        onClick && "cursor-pointer",
         className
       )}
     >

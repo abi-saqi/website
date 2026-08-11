@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/hero";
 import { IndustryStrip } from "@/components/sections/industry-strip";
 import { Problem } from "@/components/sections/problem";
 import { Capture } from "@/components/sections/capture";
+import { OmnichannelTeaser } from "@/components/sections/omnichannel-teaser";
 import { PlatformStory } from "@/components/sections/platform-story";
 import { Architecture } from "@/components/sections/architecture";
 import { Insights } from "@/components/sections/insights";
@@ -17,6 +18,7 @@ export default function Home() {
       <IndustryStrip />
       <Problem />
       <Capture />
+      <OmnichannelTeaser />
       <PlatformStory />
       <Architecture />
       <Insights />
