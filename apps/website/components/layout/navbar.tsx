@@ -42,10 +42,8 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "mx-auto flex max-w-6xl items-center justify-between rounded-r border px-4 transition-all duration-300 sm:px-5",
-          scrolled
-            ? "border-border bg-surface/80 py-2.5 shadow-[0_1px_0_0_var(--border)] backdrop-blur-xl"
-            : "border-transparent bg-transparent py-2.5"
+          "mx-auto flex max-w-6xl items-center justify-between rounded-r px-4 py-2.5 transition-all duration-300 sm:px-5",
+          scrolled ? "glass" : "border border-transparent bg-transparent"
         )}
       >
         <Link href="#top" className="flex items-center gap-2">
@@ -98,7 +96,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.2 }}
-            className="mx-4 mt-2 flex flex-col gap-1 rounded-r border border-border bg-surface p-3 shadow-xl md:hidden"
+            className="glass mx-4 mt-2 flex flex-col gap-1 rounded-r p-3 md:hidden"
           >
             {links.map((l) => (
               <a

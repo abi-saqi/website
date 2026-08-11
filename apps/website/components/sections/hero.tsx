@@ -2,9 +2,40 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, PlayCircle, MessageCircle, TrendingUp, ShieldCheck, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+
+const floatingCards = [
+  {
+    icon: MessageCircle,
+    label: "WhatsApp thread",
+    value: "12,402 active",
+    className: "left-[2%] top-[18%] hidden lg:flex",
+    float: { y: [0, -10, 0], duration: 6 },
+  },
+  {
+    icon: TrendingUp,
+    label: "Lead score",
+    value: "94 · hot",
+    className: "right-[1%] top-[24%] hidden lg:flex",
+    float: { y: [0, 12, 0], duration: 7 },
+  },
+  {
+    icon: ShieldCheck,
+    label: "Consent",
+    value: "verified inline",
+    className: "left-[6%] bottom-[10%] hidden lg:flex",
+    float: { y: [0, 10, 0], duration: 8 },
+  },
+  {
+    icon: Users,
+    label: "Agents online",
+    value: "48 · avg SLA 41s",
+    className: "right-[6%] bottom-[16%] hidden lg:flex",
+    float: { y: [0, -12, 0], duration: 6.5 },
+  },
+];
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -16,11 +47,18 @@ export function Hero() {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--spot-x", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+    e.currentTarget.style.setProperty("--spot-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+  }
+
   return (
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-[100svh] items-center overflow-hidden pt-28"
+      onMouseMove={handleMouseMove}
+      className="spotlight relative flex min-h-[100svh] items-center overflow-hidden pt-28"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,var(--primary-soft),transparent)]" />
@@ -36,6 +74,28 @@ export function Hero() {
           className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_20%,black,transparent)]"
         />
       </div>
+
+      {floatingCards.map((card) => (
+        <motion.div
+          key={card.label}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1, y: card.float.y }}
+          transition={{
+            opacity: { duration: 0.8, delay: 0.6 },
+            scale: { duration: 0.8, delay: 0.6 },
+            y: { duration: card.float.duration, repeat: Infinity, ease: "easeInOut" },
+          }}
+          className={`glass absolute z-10 items-center gap-3 rounded-r px-4 py-3 ${card.className}`}
+        >
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-r-sm bg-primary-soft text-primary">
+            <card.icon className="h-4 w-4" />
+          </span>
+          <div>
+            <p className="text-[11px] font-medium uppercase tracking-wide text-fg-dim">{card.label}</p>
+            <p className="font-mono-tabular text-sm font-semibold text-fg">{card.value}</p>
+          </div>
+        </motion.div>
+      ))}
 
       <motion.div style={{ opacity }} className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 text-center sm:px-8">
         <motion.div

@@ -4,15 +4,16 @@ import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
-import { Layers, Puzzle, ArrowDown } from "lucide-react";
+import { IconBulletList } from "@/components/ui/icon-bullet";
+import { Layers, ArrowDown, Database, Mail, Send, Bot, Headset, BarChart3 } from "lucide-react";
 
 const stack = [
-  { label: "CDP", desc: "customer data platform", offset: { x: -18, y: -10 } },
-  { label: "Marketing automation", desc: "email & campaign tools", offset: { x: 14, y: -16 } },
-  { label: "CPaaS", desc: "SMS / WhatsApp APIs", offset: { x: -22, y: 6 } },
-  { label: "Chatbot tool", desc: "bolted onto the widget", offset: { x: 20, y: 4 } },
-  { label: "Contact centre", desc: "separate agent desktop", offset: { x: -14, y: 18 } },
-  { label: "BI layer", desc: "dashboards, after the fact", offset: { x: 16, y: 20 } },
+  { label: "CDP", desc: "customer data platform", icon: Database, offset: { x: -18, y: -10 } },
+  { label: "Marketing automation", desc: "email & campaign tools", icon: Mail, offset: { x: 14, y: -16 } },
+  { label: "CPaaS", desc: "SMS / WhatsApp APIs", icon: Send, offset: { x: -22, y: 6 } },
+  { label: "Chatbot tool", desc: "bolted onto the widget", icon: Bot, offset: { x: 20, y: 4 } },
+  { label: "Contact centre", desc: "separate agent desktop", icon: Headset, offset: { x: -14, y: 18 } },
+  { label: "BI layer", desc: "dashboards, after the fact", icon: BarChart3, offset: { x: 16, y: 20 } },
 ];
 
 export function Problem() {
@@ -46,9 +47,9 @@ export function Problem() {
                     transform: `translate(${s.offset.x * converge}px, ${s.offset.y * converge}px) scale(${1 - converge * 0.12})`,
                     opacity: 1 - converge * 0.75,
                   }}
-                  className="flex h-full flex-col justify-between gap-3 rounded-r border border-border bg-surface p-5"
+                  className="glass flex h-full flex-col justify-between gap-3 rounded-r p-5"
                 >
-                  <Puzzle className="h-4 w-4 text-fg-dim" />
+                  <s.icon className="h-4 w-4 text-fg-dim" />
                   <div>
                     <p className="text-sm font-semibold text-fg">{s.label}</p>
                     <p className="text-xs text-fg-dim">{s.desc}</p>
@@ -73,7 +74,7 @@ export function Problem() {
                 transform: `scale(${0.94 + converge * 0.06})`,
                 boxShadow: `0 ${20 + converge * 20}px ${50 + converge * 40}px -25px rgba(5,150,105,${0.15 + converge * 0.25})`,
               }}
-              className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-r border border-primary/30 bg-gradient-to-b from-primary-soft to-surface p-8"
+              className="glass-strong relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-r border border-primary/30 p-8"
             >
               <div
                 className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-e300/30 blur-3xl transition-opacity duration-300"
@@ -87,19 +88,11 @@ export function Problem() {
                   customer — from first click to closed deal.
                 </p>
               </div>
-              <ul className="flex flex-col gap-2 text-sm text-fg-muted">
-                {["Single customer profile", "Real-time event log", "One compliance gate for every send"].map(
-                  (t, i) => (
-                    <motion.li
-                      key={t}
-                      style={{ opacity: Math.min(1, Math.max(0, converge * 3 - i * 0.4)) }}
-                      className="flex items-center gap-2"
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {t}
-                    </motion.li>
-                  )
-                )}
-              </ul>
+              <motion.div style={{ opacity: Math.min(1, Math.max(0, converge * 2)) }}>
+                <IconBulletList
+                  items={["Single customer profile", "Real-time event log", "One compliance gate for every send"]}
+                />
+              </motion.div>
             </motion.div>
           </div>
 

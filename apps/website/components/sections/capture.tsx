@@ -2,21 +2,54 @@
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { TiltCard } from "@/components/ui/tilt-card";
 import {
   Globe,
   Camera,
   MessageCircle,
   Webhook,
   FormInput,
+  Megaphone,
+  ArrowUpRight,
 } from "lucide-react";
 
 const sources = [
-  { icon: Globe, label: "Website widget", desc: "Embeddable chat + tracking script, live on any page in minutes" },
-  { icon: FormInput, label: "Forms & landing pages", desc: "Progressive profiling, UTM-aware, no duplicate contacts" },
-  { icon: Camera, label: "Instagram & Facebook", desc: "Comments, DMs, and lead ads land straight in the same profile" },
-  { icon: MessageCircle, label: "WhatsApp", desc: "Click-to-WhatsApp ads and Cloud API conversations, unified" },
-  { icon: Webhook, label: "API & webhooks", desc: "Push leads in from any source system in real time" },
-  { icon: Globe, label: "Ad platforms", desc: "Google & Meta lead-gen forms sync without a manual export" },
+  {
+    icon: Globe,
+    label: "Website widget",
+    desc: "Embeddable chat + tracking script, live on any page in minutes",
+    tag: "< 2 min setup",
+  },
+  {
+    icon: FormInput,
+    label: "Forms & landing pages",
+    desc: "Progressive profiling, UTM-aware, no duplicate contacts",
+    tag: "Auto de-dupe",
+  },
+  {
+    icon: Camera,
+    label: "Instagram & Facebook",
+    desc: "Comments, DMs, and lead ads land straight in the same profile",
+    tag: "Real-time sync",
+  },
+  {
+    icon: MessageCircle,
+    label: "WhatsApp",
+    desc: "Click-to-WhatsApp ads and Cloud API conversations, unified",
+    tag: "Cloud API",
+  },
+  {
+    icon: Webhook,
+    label: "API & webhooks",
+    desc: "Push leads in from any source system in real time",
+    tag: "REST + GraphQL",
+  },
+  {
+    icon: Megaphone,
+    label: "Ad platforms",
+    desc: "Google & Meta lead-gen forms sync without a manual export",
+    tag: "Zero manual export",
+  },
 ];
 
 export function Capture() {
@@ -32,19 +65,27 @@ export function Capture() {
         <RevealGroup className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {sources.map((s) => (
             <RevealItem key={s.label}>
-              <div className="group h-full rounded-r border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_8px_30px_-12px_rgba(5,150,105,0.25)]">
-                <div className="flex h-10 w-10 items-center justify-center rounded-r-sm bg-primary-soft text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                  <s.icon className="h-5 w-5" />
+              <TiltCard className="group h-full p-6" strength={6}>
+                <div className="flex items-start justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-r-sm bg-primary-soft text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                    <s.icon className="h-5 w-5" />
+                  </div>
+                  <span className="rounded-full border border-border-strong px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-fg-dim">
+                    {s.tag}
+                  </span>
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-fg">{s.label}</h3>
+                <h3 className="mt-4 flex items-center gap-1.5 text-base font-semibold text-fg">
+                  {s.label}
+                  <ArrowUpRight className="h-3.5 w-3.5 text-fg-dim opacity-0 transition-opacity group-hover:opacity-100" />
+                </h3>
                 <p className="mt-1.5 text-sm leading-6 text-fg-muted">{s.desc}</p>
-              </div>
+              </TiltCard>
             </RevealItem>
           ))}
         </RevealGroup>
 
         <Reveal delay={0.1} className="mt-6">
-          <div className="rounded-r border border-dashed border-border-strong bg-elevated p-6 text-sm leading-6 text-fg-muted sm:p-8">
+          <div className="glass rounded-r p-6 text-sm leading-6 text-fg-muted sm:p-8">
             <span className="font-semibold text-fg">Zero duplicate contacts. </span>
             Identity resolution merges anonymous website visits, ad clicks, and social
             conversations into one profile the moment an email, phone number, or login ties

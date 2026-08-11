@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 import { RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { TiltCard } from "@/components/ui/tilt-card";
 import { ShieldCheck, Lock, FileCheck2, Globe2, Users, ScrollText } from "lucide-react";
 
 const pillars = [
@@ -48,13 +49,13 @@ export function Trust() {
         <RevealGroup className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((p) => (
             <RevealItem key={p.title}>
-              <div className="h-full rounded-r border border-border bg-surface p-6">
+              <TiltCard className="h-full p-6" strength={5}>
                 <div className="flex h-10 w-10 items-center justify-center rounded-r-sm bg-primary-soft text-primary">
                   <p.icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-fg">{p.title}</h3>
                 <p className="mt-1.5 text-sm leading-6 text-fg-muted">{p.desc}</p>
-              </div>
+              </TiltCard>
             </RevealItem>
           ))}
         </RevealGroup>

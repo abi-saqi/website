@@ -10,6 +10,10 @@ import {
   ShieldCheck,
   Send,
   Database,
+  Building2,
+  Contact,
+  Zap,
+  MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -60,10 +64,10 @@ const layers = [
 ];
 
 const capacity = [
-  { value: "40+", label: "tenants" },
-  { value: "5M", label: "contacts" },
-  { value: "800/s", label: "events" },
-  { value: "400K/day", label: "messages" },
+  { value: "40+", label: "tenants", icon: Building2 },
+  { value: "5M", label: "contacts", icon: Contact },
+  { value: "800/s", label: "events", icon: Zap },
+  { value: "400K/day", label: "messages", icon: MessageSquare },
 ];
 
 export function Architecture() {
@@ -103,9 +107,12 @@ export function Architecture() {
 
             <div className="mt-10 grid grid-cols-2 gap-6 border-t border-border pt-8 sm:grid-cols-4 lg:grid-cols-2">
               {capacity.map((c) => (
-                <div key={c.label}>
-                  <div className="font-mono-tabular text-2xl font-semibold text-fg">{c.value}</div>
-                  <div className="text-xs text-fg-dim">{c.label}</div>
+                <div key={c.label} className="flex items-start gap-2.5">
+                  <c.icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <div>
+                    <div className="font-mono-tabular text-2xl font-semibold text-fg">{c.value}</div>
+                    <div className="text-xs text-fg-dim">{c.label}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -125,10 +132,8 @@ export function Architecture() {
                   }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   className={cn(
-                    "flex items-center gap-4 rounded-r border bg-surface px-5 py-4 shadow-sm",
-                    layer.highlight
-                      ? "border-primary/50 ring-1 ring-primary/20"
-                      : "border-border",
+                    "glass flex items-center gap-4 rounded-r px-5 py-4",
+                    layer.highlight && "border-primary/50 ring-1 ring-primary/20",
                     isActive && "border-primary/60 shadow-[0_8px_30px_-15px_rgba(5,150,105,0.35)]"
                   )}
                 >

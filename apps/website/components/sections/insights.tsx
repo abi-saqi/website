@@ -49,7 +49,7 @@ export function Insights() {
             style={{ opacity: 0.3 + draw * 0.7, transform: `translateY(${(1 - draw) * 16}px)` }}
             className="lg:col-span-3"
           >
-            <div className="h-full rounded-r border border-border bg-surface p-6 sm:p-8">
+            <div className="glass h-full rounded-r p-6 sm:p-8">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-semibold text-fg">Sentiment trend</p>
@@ -85,7 +85,7 @@ export function Insights() {
             style={{ opacity: 0.3 + draw * 0.7, transform: `translateY(${(1 - draw) * 16}px)` }}
             className="lg:col-span-2"
           >
-            <div className="flex h-full flex-col justify-between gap-6 rounded-r border border-border bg-surface p-6 sm:p-8">
+            <div className="glass flex h-full flex-col justify-between gap-6 rounded-r p-6 sm:p-8">
               <p className="text-sm font-semibold text-fg">Live funnel</p>
               {funnel.map((row) => (
                 <div key={row.label}>

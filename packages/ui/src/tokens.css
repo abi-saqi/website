@@ -43,6 +43,12 @@
   --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+  --glass-shadow: 0 8px 32px -12px rgba(17, 25, 23, 0.14);
+
   --background: var(--bg);
   --foreground: var(--fg);
 }
@@ -60,6 +66,11 @@
   --primary: var(--e500);
   --primary-hi: var(--e400);
   --primary-soft: rgba(16, 185, 129, 0.12);
+  --glass-bg: rgba(15, 30, 24, 0.55);
+  --glass-bg-strong: rgba(13, 26, 21, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-highlight: rgba(255, 255, 255, 0.07);
+  --glass-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.5);
   --background: var(--bg);
   --foreground: var(--fg);
 }
@@ -78,6 +89,11 @@
     --primary: var(--e500);
     --primary-hi: var(--e400);
     --primary-soft: rgba(16, 185, 129, 0.12);
+    --glass-bg: rgba(15, 30, 24, 0.55);
+    --glass-bg-strong: rgba(13, 26, 21, 0.78);
+    --glass-border: rgba(255, 255, 255, 0.09);
+    --glass-highlight: rgba(255, 255, 255, 0.07);
+    --glass-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.5);
     --background: var(--bg);
     --foreground: var(--fg);
   }
@@ -94,6 +110,67 @@
 
 .text-balance {
   text-wrap: balance;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-highlight),
+    var(--glass-shadow);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-highlight),
+    var(--glass-shadow);
+}
+
+/* Cursor-follow spotlight: set --spot-x / --spot-y (px, relative to the
+   element) from a mousemove handler; the glow is layered as ::before so it
+   can sit above a solid/glass background without extra markup. */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    480px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    var(--e300) 0%,
+    transparent 60%
+  );
+}
+:root[data-theme="dark"] .spotlight::before {
+  background: radial-gradient(
+    480px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    var(--e500) 0%,
+    transparent 60%
+  );
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .spotlight::before {
+    background: radial-gradient(
+      480px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      var(--e500) 0%,
+      transparent 60%
+    );
+  }
+}
+.spotlight:hover::before {
+  opacity: 0.14;
 }
 
 ::selection {
