@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Accordion({
   items,
 }: {
-  items: { question: string; answer: string }[];
+  items: { question: string; answer: string; icon?: LucideIcon; chip?: string }[];
 }) {
   const [open, setOpen] = useState<number | null>(0);
 
@@ -16,6 +16,7 @@ export function Accordion({
     <div className="flex flex-col gap-3">
       {items.map((item, i) => {
         const isOpen = open === i;
+        const Icon = item.icon;
         return (
           <div key={item.question} className="glass overflow-hidden rounded-r">
             <button
@@ -23,7 +24,19 @@ export function Accordion({
               className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
               aria-expanded={isOpen}
             >
-              <span className="text-sm font-semibold text-fg sm:text-base">{item.question}</span>
+              <span className="flex items-center gap-3">
+                {Icon && (
+                  <span
+                    className={cn(
+                      "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
+                      item.chip ?? "bg-primary-soft text-primary"
+                    )}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </span>
+                )}
+                <span className="text-sm font-semibold text-fg sm:text-base">{item.question}</span>
+              </span>
               <motion.span
                 animate={{ rotate: isOpen ? 45 : 0 }}
                 transition={{ duration: 0.25 }}

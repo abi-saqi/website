@@ -10,6 +10,9 @@ import {
   Webhook,
   FormInput,
   Megaphone,
+  Phone,
+  MessageSquareText,
+  MousePointerClick,
   ArrowUpRight,
 } from "lucide-react";
 
@@ -19,36 +22,63 @@ const sources = [
     label: "Website widget",
     desc: "Embeddable chat + tracking script, live on any page in minutes",
     tag: "< 2 min setup",
+    chip: "bg-primary-soft text-primary",
   },
   {
     icon: FormInput,
     label: "Forms & landing pages",
     desc: "Progressive profiling, UTM-aware, no duplicate contacts",
     tag: "Auto de-dupe",
+    chip: "bg-teal/12 text-teal-dk",
   },
   {
     icon: Camera,
     label: "Instagram & Facebook",
     desc: "Comments, DMs, and lead ads land straight in the same profile",
     tag: "Real-time sync",
+    chip: "bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white",
   },
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    desc: "Click-to-WhatsApp ads and Cloud API conversations, unified",
+    desc: "Cloud API conversations, opted-in and unified with every other channel",
     tag: "Cloud API",
+    chip: "bg-[#25D366]/14 text-[#1DA851]",
+  },
+  {
+    icon: Phone,
+    label: "Voice / IVR",
+    desc: "Inbound and outbound calls transcribed, scored, and logged to the profile",
+    tag: "Speech analytics",
+    chip: "bg-[#3B82F6]/14 text-[#3B82F6]",
+  },
+  {
+    icon: MessageSquareText,
+    label: "RCS messaging",
+    desc: "Rich cards, carousels, and suggested replies — Android's iMessage answer",
+    tag: "Rich cards",
+    chip: "bg-[#06B6D4]/14 text-[#0891B2]",
+  },
+  {
+    icon: MousePointerClick,
+    label: "Click-to-WhatsApp ads",
+    desc: "Meta CTW campaigns land the conversation directly in the same inbox",
+    tag: "Meta CTW",
+    chip: "bg-[#F97316]/14 text-[#EA580C]",
+  },
+  {
+    icon: Megaphone,
+    label: "Google & Meta Ads",
+    desc: "Lead-gen forms sync without a manual export, spend tied to revenue",
+    tag: "Zero manual export",
+    chip: "bg-[#F59E0B]/14 text-[#B45309]",
   },
   {
     icon: Webhook,
     label: "API & webhooks",
     desc: "Push leads in from any source system in real time",
     tag: "REST + GraphQL",
-  },
-  {
-    icon: Megaphone,
-    label: "Ad platforms",
-    desc: "Google & Meta lead-gen forms sync without a manual export",
-    tag: "Zero manual export",
+    chip: "bg-slate/12 text-slate",
   },
 ];
 
@@ -59,7 +89,7 @@ export function Capture() {
         <SectionHeading
           eyebrow="Capture"
           title="Catch every lead, wherever it shows up"
-          description="Website, social, ads, or a partner's system — every touch resolves to the same customer profile the instant it happens, with page-context and campaign source attached automatically."
+          description="Website, social, voice, ads, or a partner's system — every touch resolves to the same customer profile the instant it happens, with page-context and campaign source attached automatically."
         />
 
         <RevealGroup className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -67,7 +97,7 @@ export function Capture() {
             <RevealItem key={s.label}>
               <TiltCard className="group h-full p-6" strength={6}>
                 <div className="flex items-start justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-r-sm bg-primary-soft text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-r-sm transition-transform group-hover:scale-105 ${s.chip}`}>
                     <s.icon className="h-5 w-5" />
                   </div>
                   <span className="rounded-full border border-border-strong px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-fg-dim">
