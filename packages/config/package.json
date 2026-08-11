@@ -4,8 +4,6 @@
   "version": "0.1.0",
   "main": "index.js",
   "files": [
-    "eslint-preset.js",
-    "tailwind-preset.js",
     "tsconfig.base.json"
   ]
 }

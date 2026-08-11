@@ -1,11 +1,47 @@
+@import "tailwindcss";
 @import "@saqi/ui/src/tokens.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-raised: var(--raised);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-dim: var(--fg-dim);
+
+  --color-primary: var(--primary);
+  --color-primary-hi: var(--primary-hi);
+  --color-primary-soft: var(--primary-soft);
+
+  --color-e50: var(--e50);
+  --color-e100: var(--e100);
+  --color-e200: var(--e200);
+  --color-e300: var(--e300);
+  --color-e400: var(--e400);
+  --color-e500: var(--e500);
+  --color-e600: var(--e600);
+  --color-e700: var(--e700);
+  --color-e800: var(--e800);
+  --color-e900: var(--e900);
+  --color-teal: var(--teal);
+  --color-teal-dk: var(--teal-dk);
+
+  --color-amber: var(--amber);
+  --color-rose: var(--rose);
+  --color-slate: var(--slate);
+
+  --radius-r: var(--r);
+  --radius-r-sm: var(--r-sm);
+}
 
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--sans);
 }
