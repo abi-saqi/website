@@ -10,6 +10,7 @@ import {
   Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { IconBulletList } from "@/components/ui/icon-bullet";
 
 const steps = [
   {
@@ -150,13 +151,7 @@ export function PlatformStory() {
                     >
                       <h3 className="text-lg font-semibold text-fg sm:text-xl">{step.title}</h3>
                       <p className="mt-2 max-w-md text-sm leading-6 text-fg-muted">{step.body}</p>
-                      <ul className="mt-3 flex flex-col gap-1.5">
-                        {step.points.map((p) => (
-                          <li key={p} className="flex items-center gap-2 text-sm text-fg-muted">
-                            <span className="h-1 w-1 rounded-full bg-primary" /> {p}
-                          </li>
-                        ))}
-                      </ul>
+                      <IconBulletList items={step.points} className="mt-3" />
                     </motion.div>
                   </div>
                 );
@@ -165,7 +160,7 @@ export function PlatformStory() {
           </div>
 
           <div className="relative hidden lg:block">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-r border border-border bg-surface shadow-[0_20px_60px_-30px_rgba(0,0,0,0.25)]">
+            <div className="glass-strong relative aspect-[4/5] w-full overflow-hidden rounded-r">
               <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,var(--primary-soft),transparent)]" />
               {steps.map((step, i) => (
                 <motion.div
@@ -193,7 +188,7 @@ export function PlatformStory() {
                         initial={{ opacity: 0, x: 16 }}
                         animate={{ opacity: i === active ? 1 : 0, x: i === active ? 0 : 16 }}
                         transition={{ delay: ri * 0.08, duration: 0.4 }}
-                        className="rounded-r-sm border border-border bg-elevated p-4"
+                        className="glass rounded-r-sm p-4"
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-medium text-fg">{row.name}</span>

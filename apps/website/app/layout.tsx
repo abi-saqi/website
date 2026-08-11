@@ -6,6 +6,7 @@ import { ScrollProgress } from "@/components/layout/scroll-progress";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ThemeScript } from "@/components/layout/theme-script";
+import { LeadModalProvider } from "@/components/providers/lead-modal-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -38,13 +39,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <ThemeScript />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-foreground antialiased selection:bg-e300 selection:text-e900">
-        <SmoothScroll>
-          <ScrollProgress />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </SmoothScroll>
+      <body className="grain min-h-full flex flex-col bg-background text-foreground antialiased selection:bg-e300 selection:text-e900">
+        <LeadModalProvider>
+          <SmoothScroll>
+            <ScrollProgress />
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </LeadModalProvider>
       </body>
     </html>
   );
