@@ -20,16 +20,37 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const title = "Saqi.ai — Capture, Qualify, and Convert Leads in Real Time";
+const description =
+  "One platform to market, capture, qualify, and convert leads across your website, WhatsApp, Instagram, RCS, voice, and ads — with real-time sentiment insight and a scalable engine built for enterprise sales and marketing teams.";
+
 export const metadata: Metadata = {
-  title: "Saqi.ai — Capture, Qualify, and Convert Leads in Real Time",
-  description:
-    "One platform to market, capture, qualify, and convert leads across your website, WhatsApp, and social media — with real-time sentiment insight and a scalable engine built for enterprise sales and marketing teams.",
+  title,
+  description,
   metadataBase: new URL("https://saqi.ai"),
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Saqi.ai — Capture, Qualify, and Convert Leads in Real Time",
+    title,
     description:
       "The omnichannel engagement platform that unifies lead capture, qualification, campaigns, and real-time customer insight in one place.",
     type: "website",
+    url: "/",
+    siteName: "Saqi.ai",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Saqi.ai — Market. Capture. Qualify. Convert, in real time.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description:
+      "The omnichannel engagement platform that unifies lead capture, qualification, campaigns, and real-time customer insight in one place.",
+    images: ["/og.jpg"],
   },
 };
 

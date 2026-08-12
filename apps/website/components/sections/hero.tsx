@@ -147,6 +147,36 @@ export function Hero() {
           </Button>
         </motion.div>
 
+        {/* The floating cards above are the most concrete proof in the hero but
+            are positioned absolutely and only viable at lg+. Rather than hiding
+            that proof from phones entirely, the same four data points render as
+            a compact grid below the fold-line on small screens. */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-12 grid w-full max-w-md grid-cols-2 gap-2.5 lg:hidden"
+        >
+          {floatingCards.map((card) => (
+            <div
+              key={card.label}
+              className="glass flex items-center gap-2.5 rounded-r px-3 py-2.5 text-left"
+            >
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-r-sm bg-primary-soft text-primary">
+                <card.icon className="h-3.5 w-3.5" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-[10px] font-medium uppercase leading-tight tracking-wide text-fg-dim">
+                  {card.label}
+                </p>
+                <p className="font-mono-tabular mt-0.5 text-xs font-semibold leading-tight text-fg">
+                  {card.value}
+                </p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

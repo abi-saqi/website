@@ -71,7 +71,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          <Button href="/#demo" variant="ghost" size="sm">
+          <Button href="https://app.saqi.ai" variant="ghost" size="sm">
             Sign in
           </Button>
           <Button onClick={openDemo} size="sm">
@@ -111,7 +111,7 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-3">
-              <Button href="/#demo" variant="outline" size="sm">
+              <Button href="https://app.saqi.ai" variant="outline" size="sm">
                 Sign in
               </Button>
               <Button

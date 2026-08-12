@@ -84,7 +84,7 @@ const sources = [
 
 export function Capture() {
   return (
-    <section id="capture" className="py-28 sm:py-36">
+    <section id="capture" className="wash py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Capture"

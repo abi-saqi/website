@@ -45,7 +45,10 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="border-t border-border bg-elevated py-28 sm:py-36">
+    <section
+      id="faq"
+      className="wash border-t border-border bg-elevated py-28 sm:py-36"
+    >
       <div className="mx-auto max-w-3xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="FAQ"

@@ -27,7 +27,7 @@ const integrations = [
 
 export function Integrations() {
   return (
-    <section id="integrations" className="py-28 sm:py-36">
+    <section id="integrations" className="wash-warm py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Integrations"

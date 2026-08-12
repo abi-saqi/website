@@ -17,17 +17,21 @@
   --teal: #0d9488;
   --teal-dk: #0f766e;
 
-  --bg: #f3f5f4;
-  --surface: #ffffff;
-  --elevated: #f7f9f8;
-  --raised: #edf1ef;
+  /* Light ramp is deliberately not white. The ground is a warm sage-stone
+     paper so that surfaces, glass, and section bands have something to sit
+     against — a near-white ground collapses all four steps into one sheet
+     and makes .glass invisible. Keep real distance between these four. */
+  --bg: #e9eee7;
+  --surface: #fbfcfa;
+  --elevated: #f2f6f0;
+  --raised: #dde5d9;
 
-  --border: #e2e7e4;
-  --border-strong: #c9d2cd;
+  --border: #d5ded1;
+  --border-strong: #b6c4b0;
 
-  --fg: #111917;
-  --fg-muted: #5a6b64;
-  --fg-dim: #8a968f;
+  --fg: #131a16;
+  --fg-muted: #55665e;
+  --fg-dim: #7d8c83;
 
   --primary: var(--e600);
   --primary-hi: var(--e700);
@@ -43,11 +47,17 @@
   --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
-  --glass-bg: rgba(255, 255, 255, 0.55);
-  --glass-bg-strong: rgba(255, 255, 255, 0.78);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-highlight: rgba(255, 255, 255, 0.7);
-  --glass-shadow: 0 8px 32px -12px rgba(17, 25, 23, 0.14);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg-strong: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 10px 34px -14px rgba(24, 43, 33, 0.22);
+
+  /* Ambient tints used for the soft color washes behind sections. They read
+     as light in light mode and are re-pointed to dimmer values in dark. */
+  --wash-primary: rgba(5, 150, 105, 0.09);
+  --wash-teal: rgba(13, 148, 136, 0.08);
+  --wash-amber: rgba(180, 83, 9, 0.06);
 
   --background: var(--bg);
   --foreground: var(--fg);
@@ -71,6 +81,9 @@
   --glass-border: rgba(255, 255, 255, 0.09);
   --glass-highlight: rgba(255, 255, 255, 0.07);
   --glass-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.5);
+  --wash-primary: rgba(16, 185, 129, 0.1);
+  --wash-teal: rgba(13, 148, 136, 0.09);
+  --wash-amber: rgba(217, 119, 6, 0.07);
   --background: var(--bg);
   --foreground: var(--fg);
 }
@@ -122,25 +135,50 @@
     var(--glass-shadow);
 }
 
+/* Paper tooth. On a light ground `overlay` barely shifts anything, so light
+   mode multiplies the noise (darkens it into the sage) while dark mode
+   overlays it (lifts it out of the near-black). Same texture, opposite math. */
 .grain {
   position: relative;
 }
 .grain::after {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
+  /* Above section backgrounds (which are un-layered) so the tooth reads on
+     every band, but below the navbar (z-50) and modals (z-100) so it never
+     films over a dialog. Kept low enough not to dull the product imagery. */
+  z-index: 1;
   pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.075;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 :root[data-theme="dark"] .grain::after {
   opacity: 0.05;
+  mix-blend-mode: overlay;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .grain::after {
     opacity: 0.05;
+    mix-blend-mode: overlay;
   }
+}
+
+/* Ambient section wash — a soft off-center color bloom that keeps large flat
+   bands from reading as blank sheets. Applied as background-image layers
+   rather than a pseudo-element: background-image composites directly above
+   the element's own background-color (so it works on a `bg-elevated` band)
+   and below its content, with no z-index or stacking-context involvement. */
+.wash {
+  background-image:
+    radial-gradient(60% 55% at 12% 8%, var(--wash-primary), transparent 70%),
+    radial-gradient(55% 50% at 88% 92%, var(--wash-teal), transparent 70%);
+}
+.wash-warm {
+  background-image:
+    radial-gradient(55% 50% at 85% 10%, var(--wash-amber), transparent 70%),
+    radial-gradient(60% 55% at 10% 90%, var(--wash-primary), transparent 70%);
 }
 
 .glass-strong {

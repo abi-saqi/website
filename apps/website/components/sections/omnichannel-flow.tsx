@@ -1,73 +1,13 @@
 "use client";
 
-import {
-  Globe,
-  MessageCircle,
-  Camera,
-  Phone,
-  MessageSquareText,
-  Megaphone,
-  Target,
-  MousePointerClick,
-  BrainCircuit,
-  HandCoins,
-  TrendingUp,
-} from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { StatCounter } from "@/components/ui/stat-counter";
+import { CHANNELS, STAGES } from "@/lib/channels";
 
-const channels = [
-  { icon: Globe, label: "Website", y: 46, color: "var(--primary)", chip: "bg-primary-soft text-primary" },
-  {
-    icon: MessageCircle,
-    label: "WhatsApp",
-    y: 140,
-    color: "#25D366",
-    chip: "bg-[#25D366]/12 text-[#1DA851]",
-  },
-  {
-    icon: Camera,
-    label: "Instagram",
-    y: 234,
-    color: "#DD2A7B",
-    chip: "bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white",
-  },
-  { icon: Phone, label: "Voice", y: 328, color: "#3B82F6", chip: "bg-[#3B82F6]/12 text-[#3B82F6]" },
-  {
-    icon: MessageSquareText,
-    label: "RCS",
-    y: 422,
-    color: "#06B6D4",
-    chip: "bg-[#06B6D4]/12 text-[#0891B2]",
-  },
-  {
-    icon: Megaphone,
-    label: "Google Ads",
-    y: 516,
-    color: "#F59E0B",
-    chip: "bg-[#F59E0B]/14 text-[#B45309]",
-  },
-  {
-    icon: Target,
-    label: "Meta Ads",
-    y: 610,
-    color: "#0866FF",
-    chip: "bg-[#0866FF]/12 text-[#0866FF]",
-  },
-  {
-    icon: MousePointerClick,
-    label: "Click-to-WhatsApp",
-    y: 704,
-    color: "#F97316",
-    chip: "bg-[#F97316]/14 text-[#EA580C]",
-  },
-];
-
-const stages = [
-  { icon: BrainCircuit, label: "Qualify", desc: "Scored & routed", y: 260, color: "var(--primary)" },
-  { icon: HandCoins, label: "Convert", desc: "Deal won", y: 420, color: "var(--teal)" },
-  { icon: TrendingUp, label: "ROI", desc: "Revenue attributed", y: 580, color: "var(--e700)" },
-];
+/* Diagram-space vertical positions, derived from the canonical lists so the
+   layout stays evenly distributed if a channel or stage is added. */
+const channels = CHANNELS.map((c, i) => ({ ...c, y: 46 + i * 94 }));
+const stages = STAGES.map((s, i) => ({ ...s, y: 260 + i * 160 }));
 
 const HUB = { x: 500, y: 375 };
 const CHANNEL_X = 68;

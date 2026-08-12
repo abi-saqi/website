@@ -36,15 +36,18 @@ const pillars = [
   },
   {
     icon: ShieldCheck,
-    title: "SOC 2 & ISO 27001",
-    desc: "Independently audited security controls, backed by tested backup and disaster-recovery drills.",
+    title: "SOC 2 Type II in progress",
+    desc: "Controls are implemented and evidence collection is underway; the report is not yet issued. Backup and disaster-recovery drills are tested today. ISO 27001 is on the roadmap.",
     chip: "bg-rose/12 text-rose",
   },
 ];
 
 export function Trust() {
   return (
-    <section id="trust" className="border-t border-border bg-elevated py-28 sm:py-36">
+    <section
+      id="trust"
+      className="wash-warm border-t border-border bg-elevated py-28 sm:py-36"
+    >
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Trust & compliance"
