@@ -5,12 +5,13 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 import { IconBulletList } from "@/components/ui/icon-bullet";
-import { Layers, ArrowDown, Database, Mail, Send, Bot, Headset, BarChart3 } from "lucide-react";
+import { Layers, ArrowDown, Database, Mail, Bot, Headset, BarChart3 } from "lucide-react";
 
+/* These five mirror the stack the hero says saqi.ai replaces. CPaaS is
+   deliberately absent — it is not part of the product (see CLAUDE.md). */
 const stack = [
   { label: "CDP", desc: "customer data platform", icon: Database, offset: { x: -18, y: -10 } },
   { label: "Marketing automation", desc: "email & campaign tools", icon: Mail, offset: { x: 14, y: -16 } },
-  { label: "CPaaS", desc: "SMS / WhatsApp APIs", icon: Send, offset: { x: -22, y: 6 } },
   { label: "Chatbot tool", desc: "bolted onto the widget", icon: Bot, offset: { x: 20, y: 4 } },
   { label: "Contact centre", desc: "separate agent desktop", icon: Headset, offset: { x: -14, y: 18 } },
   { label: "BI layer", desc: "dashboards, after the fact", icon: BarChart3, offset: { x: 16, y: 20 } },
@@ -34,7 +35,7 @@ export function Problem() {
         <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
           <SectionHeading
             eyebrow="Why saqi.ai"
-            title="Six tools, six logins, one broken picture of the customer"
+            title="Five tools, five logins, one broken picture of the customer"
             description="Every stitched-together stack loses the same thing: a single, trustworthy, real-time view of who your customer is and what they need next. Scroll — watch it collapse into one."
           />
 

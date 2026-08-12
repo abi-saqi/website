@@ -30,8 +30,8 @@ const pillars = [
   },
   {
     icon: FileCheck2,
-    title: "DLT & 10DLC compliant",
-    desc: "WhatsApp template approval, DLT registration, and TCPA-safe sending handled inline, per market, per channel.",
+    title: "Template & opt-in governance",
+    desc: "WhatsApp and RCS template approval, per-channel opt-in capture, and TCPA-safe calling handled inline, per market, per channel.",
     chip: "bg-amber/12 text-amber",
   },
   {

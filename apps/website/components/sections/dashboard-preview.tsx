@@ -33,7 +33,7 @@ const tabs = [
     label: "Conversations",
     icon: MessagesSquare,
     src: "/dashboard/dashboard-conversations.jpg",
-    caption: "Qualify: one inbox for WhatsApp, Instagram, SMS, voice, and web — with SLA timers running.",
+    caption: "Qualify: one inbox for WhatsApp, Instagram, RCS, voice, and web — with SLA timers running.",
   },
   {
     key: "pipeline",

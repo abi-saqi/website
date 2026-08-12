@@ -39,7 +39,7 @@ const faqs = [
     chip: "bg-[#3B82F6]/12 text-[#3B82F6]",
     question: "Is our data pinned to a region?",
     answer:
-      "Yes. PII is pinned to the tenant's region by design, with jurisdiction rule packs (DPDP for India, GDPR for the EU, TCPA/10DLC for the US) applied automatically rather than bolted on per market.",
+      "Yes. PII is pinned to the tenant's region by design, with jurisdiction rule packs (DPDP for India, GDPR for the EU, TCPA for the US) applied automatically rather than bolted on per market.",
   },
 ];
 

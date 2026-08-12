@@ -45,7 +45,7 @@ const layers = [
   {
     tag: "L5",
     title: "Policy gate",
-    desc: "Non-bypassable. Consent, suppression, quiet hours, DLT, spend caps.",
+    desc: "Non-bypassable. Consent, suppression, quiet hours, templates, spend caps.",
     icon: ShieldCheck,
     highlight: true,
   },

@@ -58,4 +58,6 @@ Treat it as a **visual spec only**. Drop it in a scratch branch, then re-impleme
 
 ## Roadmap fence
 
-This scaffold covers Phase 1 (`saqi-platform`): live chat, bots, campaigns, audiences, CRM integration surfaces. Journeys, email/SMS builders, and copilot analytics are Phase 2 — build behind the same package interfaces when that work is scoped, don't pull them in early.
+This scaffold covers Phase 1 (`saqi-platform`): live chat, bots, campaigns, audiences, CRM integration surfaces. Journeys, email builders, and copilot analytics are Phase 2 — build behind the same package interfaces when that work is scoped, don't pull them in early.
+
+**Out of scope entirely:** CPaaS / programmable messaging, and SMS as a channel. These are not Phase 2 either — don't add them to code, copy, or roadmap notes. See `CLAUDE.md` for the full scope note, including the SMS-only regimes (DLT, 10DLC) that go with it.
