@@ -87,7 +87,7 @@ const copy = {
 };
 
 export function LeadModal({ mode, onClose }: { mode: Mode; onClose: () => void }) {
-  const [status, setStatus] = useState<"idle" | "done">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "done" | "error">("idle");
   const [prevMode, setPrevMode] = useState(mode);
 
   if (mode !== prevMode) {
@@ -97,9 +97,20 @@ export function LeadModal({ mode, onClose }: { mode: Mode; onClose: () => void }
 
   const c = copy[mode ?? "demo"];
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("done");
+    setStatus("submitting");
+    const body = new URLSearchParams(new FormData(e.currentTarget) as unknown as string[][]).toString();
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
+      });
+      setStatus(res.ok ? "done" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -129,7 +140,20 @@ export function LeadModal({ mode, onClose }: { mode: Mode; onClose: () => void }
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3.5">
+          <form
+            onSubmit={handleSubmit}
+            name="lead-form"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            className="mt-6 flex flex-col gap-3.5"
+          >
+            <input type="hidden" name="form-name" value="lead-form" />
+            <input type="hidden" name="type" value={mode ?? "demo"} />
+            <p className="hidden">
+              <label>
+                Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
+              </label>
+            </p>
             <div className="grid gap-3.5 sm:grid-cols-2">
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="lead-name" className="text-xs font-medium text-fg-dim">
@@ -137,6 +161,7 @@ export function LeadModal({ mode, onClose }: { mode: Mode; onClose: () => void }
                 </label>
                 <input
                   id="lead-name"
+                  name="name"
                   required
                   type="text"
                   autoComplete="name"
@@ -149,6 +174,7 @@ export function LeadModal({ mode, onClose }: { mode: Mode; onClose: () => void }
                 </label>
                 <input
                   id="lead-company"
+                  name="company"
                   required
                   type="text"
                   autoComplete="organization"
@@ -162,6 +188,7 @@ export function LeadModal({ mode, onClose }: { mode: Mode; onClose: () => void }
               </label>
               <input
                 id="lead-email"
+                name="email"
                 required
                 type="email"
                 autoComplete="email"
@@ -175,14 +202,20 @@ export function LeadModal({ mode, onClose }: { mode: Mode; onClose: () => void }
                 </label>
                 <textarea
                   id="lead-message"
+                  name="message"
                   required
                   rows={3}
                   className="resize-none rounded-r-sm border border-border-strong bg-background px-3 py-2 text-sm text-fg outline-none transition-colors focus:border-primary"
                 />
               </div>
             )}
-            <Button size="lg" className="mt-2 w-full justify-center">
-              {c.submitLabel}
+            {status === "error" && (
+              <p className="text-xs font-medium text-rose">
+                Something went wrong sending that — try again, or email sales@saqi.ai directly.
+              </p>
+            )}
+            <Button size="lg" className="mt-2 w-full justify-center" disabled={status === "submitting"}>
+              {status === "submitting" ? "Sending…" : c.submitLabel}
             </Button>
           </form>
         </>

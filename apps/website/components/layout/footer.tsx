@@ -25,6 +25,19 @@ const columns = [
 export function Footer() {
   return (
     <footer className="border-t border-border bg-elevated">
+      {/* Static, build-time-detectable mirror of the form rendered client-side in
+          components/sections/lead-modal.tsx — Netlify's form bot only parses the
+          static HTML output, so the real (client-rendered) form needs a twin here
+          with matching name/fields for Netlify to register the "lead-form" form
+          and route submissions through to notifications. */}
+      <form name="lead-form" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name" />
+        <input type="text" name="company" />
+        <input type="email" name="email" />
+        <input type="text" name="type" />
+        <textarea name="message" />
+        <input type="text" name="bot-field" />
+      </form>
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-6">
           <div className="col-span-2">

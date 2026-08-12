@@ -24,7 +24,7 @@ const stats = [
 ];
 
 export function Insights() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const [draw, setDraw] = useState(0);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -36,7 +36,7 @@ export function Insights() {
   });
 
   return (
-    <section id="insights" className="py-28 sm:py-36">
+    <section ref={ref} id="insights" className="py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Real-time insight"
@@ -44,7 +44,7 @@ export function Insights() {
           description="Sentiment, intent, and funnel health update live — not in tomorrow's report — so marketing and sales can react while it still matters."
         />
 
-        <div ref={ref} className="mt-16 grid gap-6 lg:grid-cols-5">
+        <div className="mt-16 grid gap-6 lg:grid-cols-5">
           <div
             style={{ opacity: 0.3 + draw * 0.7, transform: `translateY(${(1 - draw) * 16}px)` }}
             className="lg:col-span-3"
@@ -60,9 +60,9 @@ export function Insights() {
                 </span>
               </div>
 
-              <div className="mt-8 flex h-40 items-end gap-2.5">
+              <div className="mt-8 flex h-40 gap-2.5">
                 {sentimentBars.map((v, i) => (
-                  <div key={i} className="flex flex-1 flex-col items-center gap-2">
+                  <div key={i} className="flex flex-1 flex-col items-center gap-2 self-stretch">
                     <div className="relative w-full overflow-hidden rounded-t-sm bg-raised" style={{ height: "100%" }}>
                       <div
                         className="absolute bottom-0 w-full rounded-t-sm bg-gradient-to-t from-e600 to-e400"
