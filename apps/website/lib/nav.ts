@@ -34,7 +34,8 @@ export const PRODUCTS: ProductNavItem[] = [
 
 /** Flat links that sit beside the Products menu. */
 export const NAV_LINKS = [
+  { href: "/how-it-works", label: "How it works" },
   { href: "/use-cases", label: "Use cases" },
-  { href: "/#integrations", label: "Integrations" },
+  { href: "/developers", label: "Developers" },
   { href: "/#trust", label: "Trust" },
 ];

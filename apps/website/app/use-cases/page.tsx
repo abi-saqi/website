@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { StatCounter } from "@/components/ui/stat-counter";
 import { OmnichannelFlow } from "@/components/sections/omnichannel-flow";
 import { UseCaseScenarios } from "@/components/sections/use-case-scenarios";
-import { DashboardPreview } from "@/components/sections/dashboard-preview";
+import { DashboardShowcase } from "@/components/sections/dashboard-showcase";
+import { EventMatrix } from "@/components/sections/event-matrix";
 import { CTA } from "@/components/sections/cta";
 import { TrendingDown, Zap, TrendingUp, HeartHandshake } from "lucide-react";
 
@@ -98,16 +99,29 @@ export default function UseCasesPage() {
         </div>
       </section>
 
-      <section className="border-t border-border bg-elevated py-20 sm:py-28">
+      <section className="wash-warm border-t border-border bg-elevated py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-6 sm:px-8">
+          <SectionHeading
+            eyebrow="Events & integrations"
+            title="What your other systems can set off"
+            description="Every row is an event one of your existing tools already emits, and what saqi.ai does the moment it arrives — the nudge, the template, the CRM write-back."
+          />
+          <div className="mt-14">
+            <EventMatrix />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border pt-20 sm:pt-28">
         <div className="mx-auto max-w-6xl px-6 sm:px-8">
           <SectionHeading
             eyebrow="Inside the console"
-            title="The actual dashboard, not a mockup"
-            description="Every screen below is a real saqi.ai workspace — switch tabs to see capture, voice, conversations, and pipeline as your team would."
+            title="The actual console, not a mockup"
+            description="Every screen here is a real saqi.ai workspace. Keep scrolling to move through capture, voice, conversations, and pipeline as your team would."
           />
-          <div className="mt-14">
-            <DashboardPreview />
-          </div>
+        </div>
+        <div className="mt-14 pb-20 sm:pb-28">
+          <DashboardShowcase />
         </div>
       </section>
 

@@ -3,17 +3,15 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { CalendarCheck, CheckCircle2, LayoutDashboard, Megaphone, Phone, MessagesSquare } from "lucide-react";
+import { CalendarCheck, CheckCircle2 } from "lucide-react";
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
+import { DASHBOARDS } from "@/lib/dashboards";
 import { cn } from "@/lib/utils";
 
-const previewTabs = [
-  { key: "overview", label: "Dashboard", icon: LayoutDashboard, src: "/dashboard/dashboard-overview.jpg" },
-  { key: "acquisition", label: "Acquisition", icon: Megaphone, src: "/dashboard/dashboard-acquisition.jpg" },
-  { key: "voice", label: "Voice AI", icon: Phone, src: "/dashboard/dashboard-voice.jpg" },
-  { key: "conversations", label: "Inbox", icon: MessagesSquare, src: "/dashboard/dashboard-conversations.jpg" },
-];
+/** Reads from the shared screen list so the modal can never show a screen the
+ *  rest of the site has since renamed or replaced. */
+const previewTabs = DASHBOARDS.slice(0, 4);
 
 function DemoPreview() {
   const [active, setActive] = useState(0);

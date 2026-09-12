@@ -11,7 +11,14 @@ export const dynamic = "force-static";
 const LAST_MODIFIED = "2026-08-12";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/products/sales", "/products/marketing", "/use-cases"];
+  const routes = [
+    "",
+    "/products/sales",
+    "/products/marketing",
+    "/how-it-works",
+    "/use-cases",
+    "/developers",
+  ];
   return routes.map((path) => ({
     url: `${BASE}${path}`,
     lastModified: LAST_MODIFIED,
