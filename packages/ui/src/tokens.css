@@ -195,17 +195,64 @@
   mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent);
 }
 
-/* Product screenshots are the most valuable thing on the page. On ink they get
-   a rim and a deep drop so they sit in front of the band rather than on it. */
-.shot-frame {
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r);
-  overflow: hidden;
-  background: var(--surface);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 40px 90px -30px rgba(0, 0, 0, 0.55),
-    0 12px 32px -16px rgba(0, 0, 0, 0.4);
+/* ---------------------------------------------------------------------------
+   Surface materials.
+
+   `.shot-frame` gives product screenshots a rim and a deep drop so they sit in
+   front of an ink band rather than on it; `.glass` / `.glass-strong` are the
+   two card materials.
+
+   These live in `@layer components` on purpose. Tailwind puts its utilities in
+   `@layer utilities`, and unlayered CSS beats *any* layered CSS — so while
+   these rules sat outside a layer, their `border` and `box-shadow` silently
+   won against every utility on the same element. A `focus-visible:ring-*` on a
+   `.glass` button produced no ring at all, and a `border-primary/30` next to
+   `.glass-strong` did nothing. Layering them makes utilities override as an
+   author would expect.
+   --------------------------------------------------------------------------- */
+@layer components {
+  /* The house focus indicator.
+     Written as a literal outline rather than Tailwind's `ring-*` utilities:
+     those compose `box-shadow` out of a chain of `--tw-*` custom properties,
+     which does not resolve reliably on these elements, and a box-shadow ring
+     also collides with the box-shadow the card materials below already use.
+     An outline is independent of both, and WCAG 2.2 AA wants a visible focus
+     indicator regardless of how it is drawn. */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  .shot-frame {
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04),
+      0 40px 90px -30px rgba(0, 0, 0, 0.55),
+      0 12px 32px -16px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 0 var(--glass-highlight),
+      var(--glass-shadow);
+  }
+
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 0 var(--glass-highlight),
+      var(--glass-shadow);
+  }
 }
 
 * {
@@ -221,15 +268,6 @@
   text-wrap: balance;
 }
 
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid var(--glass-border);
-  box-shadow:
-    inset 0 1px 0 0 var(--glass-highlight),
-    var(--glass-shadow);
-}
 
 /* Paper tooth. On a light ground `overlay` barely shifts anything, so light
    mode multiplies the noise (darkens it into the sage) while dark mode
@@ -277,15 +315,6 @@
     radial-gradient(60% 55% at 10% 90%, var(--wash-primary), transparent 70%);
 }
 
-.glass-strong {
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  box-shadow:
-    inset 0 1px 0 0 var(--glass-highlight),
-    var(--glass-shadow);
-}
 
 /* Cursor-follow spotlight: set --spot-x / --spot-y (px, relative to the
    element) from a mousemove handler; the glow is layered as ::before so it
