@@ -3,17 +3,18 @@
 import { RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { useLeadModal } from "@/components/providers/lead-modal-provider";
-import { Camera, Megaphone, Phone, ArrowRight, X, Check } from "lucide-react";
+import { Phone, ArrowRight, X, Check } from "lucide-react";
+import { InstagramIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
 
 const scenarios = [
   {
-    icon: Camera,
+    icon: InstagramIcon,
     setup: "A lead DMs your Instagram at 11 PM",
     before: { icon: X, text: "Sits unread until morning — avg. 9h first response" },
     after: { icon: Check, text: "AI qualifies instantly, hands off only if high-intent — avg. 41s response" },
   },
   {
-    icon: Megaphone,
+    icon: WhatsAppIcon,
     setup: "Marketing runs a ₹5L WhatsApp campaign",
     before: { icon: X, text: "No idea which leads actually became revenue" },
     after: { icon: Check, text: "ROAS tracked to the rupee, per campaign, per channel — 5.05x average" },

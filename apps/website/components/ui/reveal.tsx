@@ -3,13 +3,20 @@
 import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { DUR, EASE, RISE, STAGGER } from "@/lib/motion";
 
+/**
+ * One enter transition for the whole site, from the shared motion scale. A
+ * short rise that settles before the eye arrives is what makes scrolling feel
+ * quick rather than animated — longer travel draws attention to the animation
+ * instead of the content.
+ */
 const variants: Variants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: RISE.md },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: DUR.base, ease: EASE },
   },
 };
 
@@ -42,7 +49,7 @@ export function Reveal({
 export function RevealGroup({
   children,
   className,
-  stagger = 0.08,
+  stagger = STAGGER,
 }: {
   children: ReactNode;
   className?: string;

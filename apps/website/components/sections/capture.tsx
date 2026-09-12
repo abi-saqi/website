@@ -5,16 +5,18 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
 import {
   Globe,
-  Camera,
-  MessageCircle,
   Webhook,
   FormInput,
   Megaphone,
   Phone,
-  MessageSquareText,
   MousePointerClick,
   ArrowUpRight,
 } from "lucide-react";
+import {
+  InstagramIcon,
+  WhatsAppIcon,
+  GoogleMessagesIcon,
+} from "@/components/ui/brand-icons";
 
 const sources = [
   {
@@ -32,14 +34,14 @@ const sources = [
     chip: "bg-teal/12 text-teal-dk",
   },
   {
-    icon: Camera,
+    icon: InstagramIcon,
     label: "Instagram & Facebook",
     desc: "Comments, DMs, and lead ads land straight in the same profile",
     tag: "Real-time sync",
-    chip: "bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white",
+    chip: "bg-[#DD2A7B]/10",
   },
   {
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
     label: "WhatsApp",
     desc: "Cloud API conversations, opted-in and unified with every other channel",
     tag: "Cloud API",
@@ -53,11 +55,11 @@ const sources = [
     chip: "bg-[#3B82F6]/14 text-[#3B82F6]",
   },
   {
-    icon: MessageSquareText,
+    icon: GoogleMessagesIcon,
     label: "RCS messaging",
     desc: "Rich cards, carousels, and suggested replies — Android's iMessage answer",
     tag: "Rich cards",
-    chip: "bg-[#06B6D4]/14 text-[#0891B2]",
+    chip: "bg-[#1A73E8]/12 text-[#1A73E8]",
   },
   {
     icon: MousePointerClick,
@@ -84,7 +86,7 @@ const sources = [
 
 export function Capture() {
   return (
-    <section id="capture" className="py-28 sm:py-36">
+    <section id="capture" className="wash py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Capture"

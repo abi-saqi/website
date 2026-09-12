@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { IconBulletList } from "@/components/ui/icon-bullet";
+import { EASE } from "@/lib/motion";
 
 const steps = [
   {
@@ -146,7 +147,7 @@ export function PlatformStory() {
                         opacity: isActive ? 1 : 0,
                         marginTop: isActive ? 8 : 0,
                       }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.35, ease: EASE }}
                       className="overflow-hidden"
                     >
                       <h3 className="text-lg font-semibold text-fg sm:text-xl">{step.title}</h3>
@@ -169,7 +170,7 @@ export function PlatformStory() {
                     opacity: i === active ? 1 : 0,
                     y: i === active ? 0 : 16,
                   }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.4, ease: EASE }}
                   className="absolute inset-0 flex flex-col p-7"
                   style={{ pointerEvents: i === active ? "auto" : "none" }}
                 >
@@ -200,7 +201,7 @@ export function PlatformStory() {
                             className={cn("h-full rounded-full", toneClass[row.tone])}
                             initial={{ width: 0 }}
                             animate={{ width: i === active ? `${row.value}%` : 0 }}
-                            transition={{ delay: ri * 0.08 + 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ delay: ri * 0.08 + 0.1, duration: 0.6, ease: EASE }}
                           />
                         </div>
                       </motion.div>

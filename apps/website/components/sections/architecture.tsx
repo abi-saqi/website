@@ -16,6 +16,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { EASE } from "@/lib/motion";
 
 const layers = [
   {
@@ -45,7 +46,7 @@ const layers = [
   {
     tag: "L5",
     title: "Policy gate",
-    desc: "Non-bypassable. Consent, suppression, quiet hours, DLT, spend caps.",
+    desc: "Non-bypassable. Consent, suppression, quiet hours, templates, spend caps.",
     icon: ShieldCheck,
     highlight: true,
   },
@@ -91,8 +92,8 @@ export function Architecture() {
       style={{ height: `${layers.length * 62}vh` }}
     >
       <div className="sticky top-0 flex min-h-screen items-center overflow-hidden py-24">
-        <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 sm:px-8">
-          <div>
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 sm:px-8">
+          <div className="min-w-0">
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
               Built to scale
             </span>
@@ -118,7 +119,7 @@ export function Architecture() {
             </div>
           </div>
 
-          <div className="flex flex-col-reverse gap-2.5">
+          <div className="flex min-w-0 flex-col-reverse gap-2.5">
             {layers.map((layer, i) => {
               const isRevealed = i < revealed;
               const isActive = i === revealed - 1;
@@ -130,9 +131,9 @@ export function Architecture() {
                     y: isRevealed ? 0 : 24,
                     scale: isActive ? 1.02 : 1,
                   }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.45, ease: EASE }}
                   className={cn(
-                    "glass flex items-center gap-4 rounded-r px-5 py-4",
+                    "glass flex min-w-0 items-center gap-4 rounded-r px-5 py-4",
                     layer.highlight && "border-primary/50 ring-1 ring-primary/20",
                     isActive && "border-primary/60 shadow-[0_8px_30px_-15px_rgba(5,150,105,0.35)]"
                   )}

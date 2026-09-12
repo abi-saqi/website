@@ -37,11 +37,16 @@ export function IndustryStrip() {
         </Reveal>
         <Marquee>
           {[...industries, ...industries].map((ind, i) => (
+            // With no customer logos to show yet, this rail is the closest the
+            // page gets to social proof — so it is rendered to be read, not
+            // greyed back to 70% opacity like decoration.
             <span
               key={i}
-              className="flex items-center gap-2.5 whitespace-nowrap text-lg font-medium text-fg-dim/70"
+              className="flex items-center gap-2.5 whitespace-nowrap text-base font-medium text-fg-muted"
             >
-              <ind.icon className="h-4 w-4 text-fg-dim/50" />
+              <span className="flex h-8 w-8 items-center justify-center rounded-r-sm bg-primary-soft text-primary">
+                <ind.icon className="h-4 w-4" />
+              </span>
               {ind.label}
             </span>
           ))}

@@ -39,13 +39,16 @@ const faqs = [
     chip: "bg-[#3B82F6]/12 text-[#3B82F6]",
     question: "Is our data pinned to a region?",
     answer:
-      "Yes. PII is pinned to the tenant's region by design, with jurisdiction rule packs (DPDP for India, GDPR for the EU, TCPA/10DLC for the US) applied automatically rather than bolted on per market.",
+      "Yes. PII is pinned to the tenant's region by design, with jurisdiction rule packs (DPDP for India, GDPR for the EU, TCPA for the US) applied automatically rather than bolted on per market.",
   },
 ];
 
 export function FAQ() {
   return (
-    <section id="faq" className="border-t border-border bg-elevated py-28 sm:py-36">
+    <section
+      id="faq"
+      className="wash border-t border-border bg-elevated py-28 sm:py-36"
+    >
       <div className="mx-auto max-w-3xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="FAQ"

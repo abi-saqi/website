@@ -1,33 +1,68 @@
 "use client";
 
+import Link from "next/link";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
 import {
-  Cloud,
-  Orbit,
-  Grid2x2,
-  ShoppingBag,
-  Megaphone,
-  Target,
-  Zap,
-  GitBranch,
-} from "lucide-react";
+  HubSpotIcon,
+  ZohoIcon,
+  ShopifyIcon,
+  WooCommerceIcon,
+  GoogleAdsIcon,
+  MetaIcon,
+  ZapierIcon,
+  ZendeskIcon,
+} from "@/components/ui/brand-icons";
 
+/**
+ * Real marks only. A connector wall is the one place on a marketing site where
+ * a generic glyph actively costs trust — the reader is scanning for a logo
+ * they recognise, and a grid of identical outline shapes tells them nothing.
+ * Connectors whose marks are not open-licensed are named in the line below the
+ * grid instead of being drawn.
+ */
 const integrations = [
-  { icon: Cloud, name: "Salesforce", category: "CRM", chip: "bg-[#00A1E0]/14 text-[#00A1E0]" },
-  { icon: Orbit, name: "HubSpot", category: "CRM", chip: "bg-[#FF7A59]/14 text-[#FF7A59]" },
-  { icon: Grid2x2, name: "Zoho", category: "CRM", chip: "bg-rose/14 text-rose" },
-  { icon: ShoppingBag, name: "Shopify", category: "Commerce", chip: "bg-[#95BF47]/16 text-[#5E8E3E]" },
-  { icon: Megaphone, name: "Google Ads", category: "Ads", chip: "bg-[#F59E0B]/14 text-[#B45309]" },
-  { icon: Target, name: "Meta Ads", category: "Ads", chip: "bg-[#0866FF]/12 text-[#0866FF]" },
-  { icon: Zap, name: "Zapier", category: "Automation", chip: "bg-[#FF4A00]/14 text-[#FF4A00]" },
-  { icon: GitBranch, name: "Segment", category: "Data", chip: "bg-teal/14 text-teal-dk" },
+  { icon: HubSpotIcon, name: "HubSpot", category: "CRM", chip: "bg-[#FF7A59]/12 text-[#FF7A59]" },
+  { icon: ZohoIcon, name: "Zoho", category: "CRM", chip: "bg-[#E42527]/10 text-[#E42527]" },
+  {
+    icon: ShopifyIcon,
+    name: "Shopify",
+    category: "Commerce",
+    chip: "bg-[#7AB55C]/14 text-[#5E8E3E]",
+  },
+  {
+    icon: WooCommerceIcon,
+    name: "WooCommerce",
+    category: "Commerce",
+    chip: "bg-[#96588A]/12 text-[#96588A]",
+  },
+  {
+    icon: GoogleAdsIcon,
+    name: "Google Ads",
+    category: "Ads",
+    chip: "bg-[#4285F4]/12 text-[#4285F4]",
+  },
+  { icon: MetaIcon, name: "Meta Ads", category: "Ads", chip: "bg-[#0467DF]/12 text-[#0467DF]" },
+  {
+    icon: ZapierIcon,
+    name: "Zapier",
+    category: "Automation",
+    chip: "bg-[#FF4F00]/12 text-[#FF4F00]",
+  },
+  {
+    icon: ZendeskIcon,
+    name: "Zendesk",
+    category: "Support",
+    // Zendesk's primary #03363D disappears on a dark band; their secondary
+    // green reads on both grounds.
+    chip: "bg-[#78A300]/14 text-[#78A300]",
+  },
 ];
 
 export function Integrations() {
   return (
-    <section id="integrations" className="py-28 sm:py-36">
+    <section id="integrations" className="wash-warm py-28 sm:py-36">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           eyebrow="Integrations"
@@ -39,8 +74,10 @@ export function Integrations() {
           {integrations.map((it) => (
             <RevealItem key={it.name}>
               <TiltCard className="flex h-full flex-col items-center gap-3 p-6 text-center" strength={5}>
-                <span className={`flex h-11 w-11 items-center justify-center rounded-r-sm ${it.chip}`}>
-                  <it.icon className="h-5 w-5" />
+                <span
+                  className={`flex h-12 w-12 items-center justify-center rounded-r-sm ${it.chip}`}
+                >
+                  <it.icon className="h-6 w-6" />
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-fg">{it.name}</p>
@@ -51,7 +88,18 @@ export function Integrations() {
           ))}
         </RevealGroup>
 
-        <RevealGroup className="mt-6 grid gap-4 sm:grid-cols-3">
+        <Reveal delay={0.1}>
+          <p className="mt-6 text-center text-sm text-fg-muted">
+            Salesforce, Slack, Segment and Twilio connectors ship too, alongside{" "}
+            <span className="font-semibold text-fg">40+</span> more —{" "}
+            <Link href="/developers" className="font-semibold text-primary hover:text-primary-hi">
+              and anything else through the API
+            </Link>
+            .
+          </p>
+        </Reveal>
+
+        <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-3">
           {[
             { stat: "2-way sync", desc: "Contact, deal, and pipeline updates flow both directions in near real time." },
             { stat: "No migration", desc: "Keep your CRM as the system of record — saqi.ai enriches it, doesn't replace it." },
