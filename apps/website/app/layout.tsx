@@ -20,9 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const title = "Saqi.ai — Capture, Qualify, and Convert Leads in Real Time";
+const title = "Saqi.ai — Omnichannel CRM for sales and marketing teams";
 const description =
-  "One platform to market, capture, qualify, and convert leads across your website, WhatsApp, Instagram, RCS, voice, and ads — with real-time sentiment insight and a scalable engine built for enterprise sales and marketing teams.";
+  "One CRM for the whole revenue team: pipeline and deal automation, campaigns and nudges, and an agent inbox spanning website, WhatsApp, Instagram, RCS, voice, and ads — all on a single live customer profile.";
 
 export const metadata: Metadata = {
   title,

@@ -105,7 +105,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Badge>One profile. Every channel. Real time.</Badge>
+          <Badge>Omnichannel CRM for revenue teams</Badge>
         </motion.div>
 
         <motion.h1
@@ -114,10 +114,10 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 max-w-4xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-fg sm:text-6xl md:text-[4.25rem]"
         >
-          Market. Capture. Qualify.
+          One CRM for the whole
           <br />
           <span className="bg-gradient-to-r from-e600 via-primary to-teal bg-clip-text text-transparent">
-            Convert — in real time.
+            revenue team.
           </span>
         </motion.h1>
 
@@ -127,10 +127,9 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 max-w-2xl text-balance text-lg leading-8 text-fg-muted sm:text-xl"
         >
-          Saqi.ai replaces your CDP, marketing automation, chatbot, and contact-centre stack
-          with one platform — running campaigns, capturing leads from your website and social
-          channels, scoring intent, reading sentiment, and routing to the right rep, all on a
-          single real-time customer profile.
+          saqi.ai brings lead capture, qualification, campaigns, and the agent inbox onto one
+          live customer profile — so sales, marketing, and support stop working from four
+          different versions of the same customer.
         </motion.p>
 
         <motion.div

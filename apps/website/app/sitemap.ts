@@ -11,13 +11,11 @@ export const dynamic = "force-static";
 const LAST_MODIFIED = "2026-08-12";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    { url: BASE, lastModified: LAST_MODIFIED, changeFrequency: "weekly", priority: 1 },
-    {
-      url: `${BASE}/use-cases`,
-      lastModified: LAST_MODIFIED,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-  ];
+  const routes = ["", "/products/sales", "/products/marketing", "/use-cases"];
+  return routes.map((path) => ({
+    url: `${BASE}${path}`,
+    lastModified: LAST_MODIFIED,
+    changeFrequency: "weekly" as const,
+    priority: path === "" ? 1 : 0.8,
+  }));
 }
