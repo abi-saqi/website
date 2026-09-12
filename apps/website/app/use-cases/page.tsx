@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { StatCounter } from "@/components/ui/stat-counter";
 import { OmnichannelFlow } from "@/components/sections/omnichannel-flow";
 import { UseCaseScenarios } from "@/components/sections/use-case-scenarios";
-import { DashboardShowcase } from "@/components/sections/dashboard-showcase";
+import { ConsoleBand } from "@/components/sections/console-band";
 import { EventMatrix } from "@/components/sections/event-matrix";
 import { CTA } from "@/components/sections/cta";
 import { TrendingDown, Zap, TrendingUp, HeartHandshake } from "lucide-react";
@@ -51,8 +51,7 @@ const roiStats = [
 export default function UseCasesPage() {
   return (
     <>
-      <section className="relative overflow-hidden pb-20 pt-36 sm:pb-28 sm:pt-40">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,var(--primary-soft),transparent)]" />
+      <section className="ink ink-glow ink-grid relative overflow-hidden pb-20 pt-36 sm:pb-28 sm:pt-40">
         <div className="mx-auto max-w-4xl px-6 text-center sm:px-8">
           <Reveal>
             <Badge>Omnichannel · capture to revenue</Badge>
@@ -61,7 +60,7 @@ export default function UseCasesPage() {
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.1] tracking-tight text-fg sm:text-5xl md:text-6xl">
               Every channel in.
               <br />
-              <span className="bg-gradient-to-r from-e600 via-primary to-teal bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-e300 via-e400 to-teal bg-clip-text text-transparent">
                 One revenue number out.
               </span>
             </h1>
@@ -112,18 +111,7 @@ export default function UseCasesPage() {
         </div>
       </section>
 
-      <section className="border-t border-border pt-20 sm:pt-28">
-        <div className="mx-auto max-w-6xl px-6 sm:px-8">
-          <SectionHeading
-            eyebrow="Inside the console"
-            title="The actual console, not a mockup"
-            description="Every screen here is a real saqi.ai workspace. Keep scrolling to move through capture, voice, conversations, and pipeline as your team would."
-          />
-        </div>
-        <div className="mt-14 pb-20 sm:pb-28">
-          <DashboardShowcase />
-        </div>
-      </section>
+      <ConsoleBand />
 
       <section className="relative overflow-hidden py-20 sm:py-28">
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--primary-soft),transparent)]" />

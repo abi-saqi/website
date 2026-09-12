@@ -1,142 +1,115 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, PlayCircle, MessageCircle, TrendingUp, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, PlayCircle, TrendingUp, ShieldCheck, Users } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/brand-icons";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { EASE } from "@/lib/motion";
 import { useLeadModal } from "@/components/providers/lead-modal-provider";
 
-const floatingCards = [
+/**
+ * Live numbers, in a rail directly under the product shot.
+ *
+ * These were previously absolutely positioned around the screenshot. At the
+ * 1152px content width there is no gutter to hold them, so they landed on top
+ * of the densest part of the UI and obscured the one asset worth showing. A
+ * rail reads at every breakpoint and leaves the screenshot intact.
+ */
+const proofChips = [
   {
-    icon: MessageCircle,
-    label: "WhatsApp thread",
-    value: "12,402 active",
-    className: "left-[2%] top-[18%] hidden lg:flex",
-    float: { y: [0, -10, 0], duration: 6 },
+    icon: WhatsAppIcon,
+    label: "WhatsApp threads",
+    value: "12,402",
+    note: "active now",
+    tint: "text-[#25D366]",
   },
   {
     icon: TrendingUp,
-    label: "Lead score",
-    value: "94 · hot",
-    className: "right-[1%] top-[24%] hidden lg:flex",
-    float: { y: [0, 12, 0], duration: 7 },
+    label: "Top lead score",
+    value: "94",
+    note: "routed in 41s",
+    tint: "text-primary",
   },
   {
     icon: ShieldCheck,
     label: "Consent",
-    value: "verified inline",
-    className: "left-[6%] bottom-[10%] hidden lg:flex",
-    float: { y: [0, 10, 0], duration: 8 },
+    value: "100%",
+    note: "checked pre-send",
+    tint: "text-[#60A5FA]",
   },
   {
     icon: Users,
     label: "Agents online",
-    value: "48 · avg SLA 41s",
-    className: "right-[6%] bottom-[16%] hidden lg:flex",
-    float: { y: [0, -12, 0], duration: 6.5 },
+    value: "48",
+    note: "across 6 queues",
+    tint: "text-[#FBBF24]",
   },
+];
+
+const trustRail = [
+  "SOC 2 Type II · in progress",
+  "DPDP · GDPR · TCPA ready",
+  "99.95% uptime SLA",
+  "SSO · SCIM · RBAC",
 ];
 
 export function Hero() {
   const { openDemo } = useLeadModal();
+  const reduced = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty("--spot-x", `${((e.clientX - rect.left) / rect.width) * 100}%`);
-    e.currentTarget.style.setProperty("--spot-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
-  }
+  // A single parallax gesture on the screenshot. The headline no longer fades
+  // on scroll: two competing scroll effects in one viewport read as noise.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const shotY = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   return (
     <section
       id="top"
       ref={ref}
-      onMouseMove={handleMouseMove}
-      className="spotlight relative flex min-h-[100svh] items-center overflow-hidden pt-28"
+      className="ink ink-glow ink-grid relative overflow-hidden pt-32 sm:pt-36"
     >
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,var(--primary-soft),transparent)]" />
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 text-center sm:px-8">
         <motion.div
-          style={{ y: y1 }}
-          className="absolute left-[8%] top-24 h-72 w-72 rounded-full bg-e300/30 blur-[110px]"
-        />
-        <motion.div
-          style={{ y: y2 }}
-          className="absolute right-[10%] top-52 h-80 w-80 rounded-full bg-teal/25 blur-[120px]"
-        />
-        <div
-          className="absolute inset-0 opacity-[0.35] [background-image:linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_20%,black,transparent)]"
-        />
-      </div>
-
-      {floatingCards.map((card) => (
-        <motion.div
-          key={card.label}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1, y: card.float.y }}
-          transition={{
-            opacity: { duration: 0.8, delay: 0.6 },
-            scale: { duration: 0.8, delay: 0.6 },
-            y: { duration: card.float.duration, repeat: Infinity, ease: "easeInOut" },
-          }}
-          className={`glass absolute z-10 items-center gap-3 rounded-r px-4 py-3 ${card.className}`}
-        >
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-r-sm bg-primary-soft text-primary">
-            <card.icon className="h-4 w-4" />
-          </span>
-          <div>
-            <p className="text-[11px] font-medium uppercase tracking-wide text-fg-dim">{card.label}</p>
-            <p className="font-mono-tabular text-sm font-semibold text-fg">{card.value}</p>
-          </div>
-        </motion.div>
-      ))}
-
-      <motion.div style={{ opacity }} className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 text-center sm:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: EASE }}
         >
           <Badge>Omnichannel CRM for revenue teams</Badge>
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 max-w-4xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-fg sm:text-6xl md:text-[4.25rem]"
+          transition={{ duration: 0.55, delay: 0.08, ease: EASE }}
+          className="mt-7 max-w-4xl text-balance text-4xl font-semibold leading-[1.06] tracking-tight text-fg sm:text-6xl md:text-[4.25rem]"
         >
           One CRM for the whole
           <br />
-          <span className="bg-gradient-to-r from-e600 via-primary to-teal bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-e300 via-e400 to-teal bg-clip-text text-transparent">
             revenue team.
           </span>
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 max-w-2xl text-balance text-lg leading-8 text-fg-muted sm:text-xl"
+          transition={{ duration: 0.55, delay: 0.16, ease: EASE }}
+          className="mt-6 max-w-2xl text-balance text-lg leading-8 text-fg-muted"
         >
-          saqi.ai brings lead capture, qualification, campaigns, and the agent inbox onto one
-          live customer profile — so sales, marketing, and support stop working from four
-          different versions of the same customer.
+          saqi.ai brings lead capture, qualification, campaigns, and the agent inbox onto one live
+          customer profile — so sales, marketing, and support stop working from four different
+          versions of the same customer.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
+          transition={{ duration: 0.55, delay: 0.24, ease: EASE }}
+          className="mt-9 flex flex-col items-center gap-3 sm:flex-row"
         >
           <Button onClick={openDemo} size="lg">
             Book a demo <ArrowRight className="h-4 w-4" />
@@ -146,51 +119,79 @@ export function Hero() {
           </Button>
         </motion.div>
 
-        {/* The floating cards above are the most concrete proof in the hero but
-            are positioned absolutely and only viable at lg+. Rather than hiding
-            that proof from phones entirely, the same four data points render as
-            a compact grid below the fold-line on small screens. */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-12 grid w-full max-w-md grid-cols-2 gap-2.5 lg:hidden"
-        >
-          {floatingCards.map((card) => (
-            <div
-              key={card.label}
-              className="glass flex items-center gap-2.5 rounded-r px-3 py-2.5 text-left"
-            >
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-r-sm bg-primary-soft text-primary">
-                <card.icon className="h-3.5 w-3.5" />
-              </span>
-              <div className="min-w-0">
-                <p className="text-[10px] font-medium uppercase leading-tight tracking-wide text-fg-dim">
-                  {card.label}
-                </p>
-                <p className="font-mono-tabular mt-0.5 text-xs font-semibold leading-tight text-fg">
-                  {card.value}
-                </p>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-xs font-medium uppercase tracking-wider text-fg-dim"
+          transition={{ duration: 0.6, delay: 0.32 }}
+          className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 text-xs font-medium uppercase tracking-wider text-fg-dim"
         >
-          <span>SOC 2 Type II · in progress</span>
-          <span className="h-1 w-1 rounded-full bg-border-strong" />
-          <span>DPDP · GDPR · TCPA ready</span>
-          <span className="h-1 w-1 rounded-full bg-border-strong" />
-          <span>99.95% uptime SLA</span>
-          <span className="h-1 w-1 rounded-full bg-border-strong" />
-          <span>SSO · SCIM · RBAC</span>
+          {trustRail.map((t, i) => (
+            <span key={t} className="flex items-center gap-5">
+              {i > 0 && <span className="hidden h-1 w-1 rounded-full bg-border-strong sm:block" />}
+              {t}
+            </span>
+          ))}
         </motion.div>
+      </div>
+
+      {/* The product shot, given the space the headline used to waste. */}
+      <motion.div
+        style={reduced ? undefined : { y: shotY }}
+        initial={{ opacity: 0, y: 44 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.34, ease: EASE }}
+        className="relative mx-auto mt-14 max-w-6xl px-6 sm:mt-18 sm:px-8"
+      >
+        <div className="shot-frame relative">
+          <Image
+            src="/dashboard/dashboard-overview.jpg"
+            alt="The saqi.ai dashboard: cross-channel lead volume, revenue trend, and lead funnel in one view"
+            width={1800}
+            height={973}
+            priority
+            sizes="(max-width: 1152px) 100vw, 1152px"
+            className="block h-auto w-full"
+          />
+          {/* Fades the shot into the band so it does not end on a hard line. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#04100a] to-transparent"
+          />
+        </div>
+
       </motion.div>
+
+      {/* Proof rail. Sits on the frame's lower edge so the shot and the numbers
+          read as one object rather than two stacked blocks. */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.75, ease: EASE }}
+        className="relative z-10 mx-auto -mt-10 max-w-5xl px-6 sm:-mt-12 sm:px-8"
+      >
+        <dl className="glass-strong grid grid-cols-2 gap-px overflow-hidden rounded-r sm:grid-cols-4">
+          {proofChips.map((chip) => (
+            <div key={chip.label} className="flex items-center gap-3 px-4 py-4 sm:px-5">
+              <span className={`flex h-9 w-9 shrink-0 items-center justify-center ${chip.tint}`}>
+                <chip.icon className="h-5 w-5" />
+              </span>
+              <div className="min-w-0">
+                <dt className="truncate text-[10px] font-medium uppercase tracking-wide text-fg-dim">
+                  {chip.label}
+                </dt>
+                <dd className="font-mono-tabular text-lg font-semibold leading-tight text-fg">
+                  {chip.value}{" "}
+                  <span className="font-sans text-[11px] font-normal text-fg-muted">
+                    {chip.note}
+                  </span>
+                </dd>
+              </div>
+            </div>
+          ))}
+        </dl>
+      </motion.div>
+
+      <div className="h-20 sm:h-24" />
     </section>
   );
 }

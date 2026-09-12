@@ -1,16 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Inbox,
-  Brain,
-  Send,
-  ArrowUpRight,
-  Clock,
-  Camera,
-  MessageCircle,
-  PhoneCall,
-  Handshake,
-} from "lucide-react";
+import { Inbox, Brain, Send, ArrowUpRight, Clock, PhoneCall, Handshake } from "lucide-react";
+import { InstagramIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
 import { ProductHero, ProductFooterNav } from "@/components/products/product-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
@@ -86,14 +77,14 @@ const glossary = [
 
 const journey = [
   {
-    icon: Camera,
+    icon: InstagramIcon,
     time: "11:04 pm",
     title: "She taps your Instagram ad",
     body: "Priya sees an ad for your winter range and sends a message asking whether a coat comes in her size.",
-    chip: "bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white",
+    chip: "bg-[#DD2A7B]/10",
   },
   {
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
     time: "11:04 pm",
     title: "She gets an answer straight away",
     body: "The assistant checks the catalogue, confirms the size is in stock, and asks which city she is in — without waking anyone up.",
@@ -167,7 +158,7 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="wash border-t border-border bg-elevated py-16 sm:py-20">
+      <section className="ink ink-glow relative py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-6 sm:px-8">
           <SectionHeading
             eyebrow="One evening, start to finish"

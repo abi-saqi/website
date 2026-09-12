@@ -112,6 +112,102 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Inverted "ink" bands.
+
+   A page built from a single value reads as a document, not a product. Every
+   enterprise site we benchmark against (Yellow.ai, Gupshup, Braze, Twilio)
+   breaks the scroll with deep bands that the light product imagery then glows
+   against.
+
+   `.ink` re-points the whole token set on a subtree rather than adding new
+   utilities, so every component inside it — `text-fg`, `bg-surface`, `.glass`,
+   `border-border` — inverts with no markup change, and a section can be moved
+   onto or off the band by editing one class. It is value-locked: unlike the
+   `[data-theme]` blocks it does NOT follow the user's theme, because the band
+   has to stay dark in light mode to do its job.
+   --------------------------------------------------------------------------- */
+.ink,
+.on-ink {
+  --bg: #04100a;
+  --surface: #0a1b13;
+  --elevated: #0d2318;
+  --raised: #12301f;
+
+  --border: #1c3a29;
+  --border-strong: #2a5540;
+
+  --fg: #f0f8f3;
+  --fg-muted: #a3bdb0;
+  --fg-dim: #74907f;
+
+  --primary: var(--e400);
+  --primary-hi: var(--e300);
+  --primary-soft: rgba(52, 211, 153, 0.14);
+
+  --glass-bg: rgba(18, 48, 31, 0.5);
+  --glass-bg-strong: rgba(10, 27, 19, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.7);
+
+  --wash-primary: rgba(52, 211, 153, 0.11);
+  --wash-teal: rgba(20, 184, 166, 0.1);
+  --wash-amber: rgba(245, 158, 11, 0.07);
+}
+
+/* `.ink` paints the band. `.on-ink` only re-points the tokens, for elements
+   that sit *over* a band without owning it — the transparent navbar at the
+   top of a page, which would otherwise render near-black text on near-black. */
+.ink {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+/* The band needs its own light so it does not read as a flat black rectangle:
+   a low emerald horizon at the top edge and a faint grid, both non-interactive
+   and both beneath the content. */
+.ink-glow {
+  position: relative;
+  isolation: isolate;
+}
+.ink-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(70% 45% at 50% 0%, rgba(16, 185, 129, 0.2), transparent 72%),
+    radial-gradient(45% 40% at 88% 100%, rgba(13, 148, 136, 0.14), transparent 70%);
+}
+.ink-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent);
+}
+
+/* Product screenshots are the most valuable thing on the page. On ink they get
+   a rim and a deep drop so they sit in front of the band rather than on it. */
+.shot-frame {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 40px 90px -30px rgba(0, 0, 0, 0.55),
+    0 12px 32px -16px rgba(0, 0, 0, 0.4);
+}
+
 * {
   border-color: var(--border);
 }

@@ -25,8 +25,9 @@ export function ProductHero({
   const { openDemo } = useLeadModal();
 
   return (
-    <section className="relative overflow-hidden pb-20 pt-36 sm:pb-24 sm:pt-40">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_55%_45%_at_50%_0%,var(--primary-soft),transparent)]" />
+    // Ink, like every other page opening. It is also what the fixed navbar
+    // assumes is behind it at scroll position zero.
+    <section className="ink ink-glow ink-grid relative overflow-hidden pb-20 pt-36 sm:pb-24 sm:pt-40">
       <div className="mx-auto max-w-4xl px-6 text-center sm:px-8">
         <Reveal>
           <Badge>{eyebrow}</Badge>

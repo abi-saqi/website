@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { EASE } from "@/lib/motion";
 
 const stages = [
   {
@@ -70,7 +71,7 @@ export function PipelineBoard() {
                   transition={{
                     duration: 0.45,
                     delay: si * 0.08 + di * 0.06,
-                    ease: [0.16, 1, 0.3, 1],
+                    ease: EASE,
                   }}
                   className="rounded-r-sm border border-border bg-surface p-2.5"
                 >

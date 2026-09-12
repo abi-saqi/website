@@ -1,20 +1,15 @@
+import { Globe, Phone, BrainCircuit, HandCoins, TrendingUp, type LucideIcon } from "lucide-react";
 import {
-  Globe,
-  MessageCircle,
-  Camera,
-  Phone,
-  MessageSquareText,
-  Megaphone,
-  Target,
-  MousePointerClick,
-  BrainCircuit,
-  HandCoins,
-  TrendingUp,
-  type LucideIcon,
-} from "lucide-react";
+  WhatsAppIcon,
+  InstagramIcon,
+  MetaIcon,
+  GoogleAdsIcon,
+  GoogleMessagesIcon,
+  type IconComponent,
+} from "@/components/ui/brand-icons";
 
 export type Channel = {
-  icon: LucideIcon;
+  icon: IconComponent;
   label: string;
   /** Stroke/particle colour for the SVG diagram. */
   color: string;
@@ -25,24 +20,42 @@ export type Channel = {
 /**
  * Canonical channel list. Both the full omnichannel diagram (/use-cases) and
  * the compact Home teaser read from this so the two never drift apart.
- * Colours are the channels' own brand hues, deliberately not the emerald
- * accent, so a reader can pick out a channel at a glance.
+ *
+ * Channels that belong to a third party use that party's real mark and hue —
+ * a reader scanning the row should recognise WhatsApp by its logo, not read a
+ * label to find out which generic speech bubble it is. Website and Voice stay
+ * on Lucide glyphs because they are capabilities, not brands.
  */
 export const CHANNELS: Channel[] = [
   { icon: Globe, label: "Website", color: "var(--primary)", chip: "bg-primary-soft text-primary" },
-  { icon: MessageCircle, label: "WhatsApp", color: "#25D366", chip: "bg-[#25D366]/12 text-[#1DA851]" },
   {
-    icon: Camera,
+    icon: WhatsAppIcon,
+    label: "WhatsApp",
+    color: "#25D366",
+    chip: "bg-[#25D366]/14 text-[#1DA851]",
+  },
+  {
+    icon: InstagramIcon,
     label: "Instagram",
     color: "#DD2A7B",
-    chip: "bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white",
+    chip: "bg-[#DD2A7B]/10",
   },
   { icon: Phone, label: "Voice", color: "#3B82F6", chip: "bg-[#3B82F6]/12 text-[#3B82F6]" },
-  { icon: MessageSquareText, label: "RCS", color: "#06B6D4", chip: "bg-[#06B6D4]/12 text-[#0891B2]" },
-  { icon: Megaphone, label: "Google Ads", color: "#F59E0B", chip: "bg-[#F59E0B]/14 text-[#B45309]" },
-  { icon: Target, label: "Meta Ads", color: "#0866FF", chip: "bg-[#0866FF]/12 text-[#0866FF]" },
   {
-    icon: MousePointerClick,
+    icon: GoogleMessagesIcon,
+    label: "RCS",
+    color: "#1A73E8",
+    chip: "bg-[#1A73E8]/12 text-[#1A73E8]",
+  },
+  {
+    icon: GoogleAdsIcon,
+    label: "Google Ads",
+    color: "#4285F4",
+    chip: "bg-[#4285F4]/12 text-[#4285F4]",
+  },
+  { icon: MetaIcon, label: "Meta Ads", color: "#0467DF", chip: "bg-[#0467DF]/12 text-[#0467DF]" },
+  {
+    icon: WhatsAppIcon,
     label: "Click-to-WhatsApp",
     color: "#F97316",
     chip: "bg-[#F97316]/14 text-[#EA580C]",

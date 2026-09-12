@@ -1,12 +1,11 @@
+import { CalendarX2, ArrowRight } from "lucide-react";
 import {
-  ShoppingBag,
-  Cloud,
-  LifeBuoy,
-  Target,
-  CalendarX2,
-  ArrowRight,
-  type LucideIcon,
-} from "lucide-react";
+  ShopifyIcon,
+  MetaIcon,
+  ZendeskIcon,
+  HubSpotIcon,
+  type IconComponent,
+} from "@/components/ui/brand-icons";
 import { RevealGroup, RevealItem } from "@/components/ui/reveal";
 
 type Action = { label: string; kind: "nudge" | "template" | "bulk" | "crm" | "suppress" };
@@ -20,7 +19,7 @@ const actionStyle: Record<Action["kind"], string> = {
 };
 
 type Row = {
-  icon: LucideIcon;
+  icon: IconComponent;
   chip: string;
   source: string;
   event: string;
@@ -30,8 +29,8 @@ type Row = {
 
 const rows: Row[] = [
   {
-    icon: ShoppingBag,
-    chip: "bg-[#95BF47]/16 text-[#5E8E3E]",
+    icon: ShopifyIcon,
+    chip: "bg-[#7AB55C]/14 text-[#5E8E3E]",
     source: "Shopify",
     event: "cart.abandoned",
     what: "Someone leaves a full basket without checking out.",
@@ -42,8 +41,8 @@ const rows: Row[] = [
     ],
   },
   {
-    icon: ShoppingBag,
-    chip: "bg-[#95BF47]/16 text-[#5E8E3E]",
+    icon: ShopifyIcon,
+    chip: "bg-[#7AB55C]/14 text-[#5E8E3E]",
     source: "Shopify",
     event: "order.fulfilled",
     what: "An order ships and a tracking number exists.",
@@ -53,8 +52,8 @@ const rows: Row[] = [
     ],
   },
   {
-    icon: Target,
-    chip: "bg-[#0866FF]/12 text-[#0866FF]",
+    icon: MetaIcon,
+    chip: "bg-[#0467DF]/12 text-[#0467DF]",
     source: "Meta Lead Ads",
     event: "lead.submitted",
     what: "A lead form is completed on Facebook or Instagram.",
@@ -64,9 +63,9 @@ const rows: Row[] = [
     ],
   },
   {
-    icon: Cloud,
-    chip: "bg-[#00A1E0]/14 text-[#00A1E0]",
-    source: "Salesforce / HubSpot",
+    icon: HubSpotIcon,
+    chip: "bg-[#FF7A59]/12 text-[#FF7A59]",
+    source: "HubSpot / Salesforce",
     event: "opportunity.stage_changed",
     what: "A deal moves to negotiation, or slips backwards.",
     actions: [
@@ -75,8 +74,8 @@ const rows: Row[] = [
     ],
   },
   {
-    icon: LifeBuoy,
-    chip: "bg-[#F59E0B]/14 text-[#B45309]",
+    icon: ZendeskIcon,
+    chip: "bg-[#78A300]/14 text-[#78A300]",
     source: "Zendesk / Freshdesk",
     event: "ticket.escalated",
     what: "A customer has an open complaint.",

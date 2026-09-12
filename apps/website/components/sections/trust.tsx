@@ -46,7 +46,7 @@ export function Trust() {
   return (
     <section
       id="trust"
-      className="wash-warm border-t border-border bg-elevated py-28 sm:py-36"
+      className="ink ink-glow relative overflow-hidden py-28 sm:py-32"
     >
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading

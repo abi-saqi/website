@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { animate, motion, useInView, useMotionValue, useTransform } from "framer-motion";
+import { EASE } from "@/lib/motion";
 
 export function StatCounter({
   value,
@@ -25,7 +26,7 @@ export function StatCounter({
     if (!inView) return;
     const controls = animate(count, value, {
       duration: 1.8,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EASE,
     });
     return controls.stop;
   }, [inView, value, count]);

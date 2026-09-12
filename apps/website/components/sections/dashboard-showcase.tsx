@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { DASHBOARDS } from "@/lib/dashboards";
 import { cn } from "@/lib/utils";
+import { EASE } from "@/lib/motion";
 
 const COUNT = DASHBOARDS.length;
 /** Scroll distance allotted to each screen. Longer feels laboured, shorter skips. */
@@ -95,7 +96,7 @@ export function DashboardShowcase() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.3, ease: EASE }}
                   className="mt-8 border-t border-border pt-6"
                 >
                   <h3 className="text-xl font-semibold tracking-tight text-fg">
@@ -115,7 +116,7 @@ export function DashboardShowcase() {
                   initial={{ opacity: 0, scale: 1.015 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.995 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.4, ease: EASE }}
                   className="absolute inset-0"
                 >
                   <Image

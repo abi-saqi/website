@@ -1,18 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Zap,
-  GitBranch,
-  UserCheck,
-  MessageCircle,
-  CheckSquare,
-  type LucideIcon,
-} from "lucide-react";
+import { Zap, GitBranch, UserCheck, CheckSquare } from "lucide-react";
+import { WhatsAppIcon, type IconComponent } from "@/components/ui/brand-icons";
+import { EASE } from "@/lib/motion";
 
 type Node = {
   kind: "trigger" | "condition" | "action";
-  icon: LucideIcon;
+  icon: IconComponent;
   label: string;
   detail: string;
 };
@@ -21,7 +16,7 @@ const nodes: Node[] = [
   { kind: "trigger", icon: Zap, label: "Trigger", detail: "Demo form submitted" },
   { kind: "condition", icon: GitBranch, label: "Condition", detail: "Lead score ≥ 70" },
   { kind: "action", icon: UserCheck, label: "Action", detail: "Assign to AE by territory" },
-  { kind: "action", icon: MessageCircle, label: "Action", detail: "Send WhatsApp confirmation" },
+  { kind: "action", icon: WhatsAppIcon, label: "Action", detail: "Send WhatsApp confirmation" },
   { kind: "action", icon: CheckSquare, label: "Action", detail: "Create follow-up task, 2h SLA" },
 ];
 
@@ -52,7 +47,7 @@ export function AutomationFlow() {
             initial={{ opacity: 0, x: -12 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-15%" }}
-            transition={{ duration: 0.45, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.45, delay: i * 0.1, ease: EASE }}
             className="relative flex items-center gap-3 pl-4"
           >
             {/* Rail segment linking this node to the previous one. */}

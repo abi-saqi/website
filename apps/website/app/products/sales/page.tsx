@@ -72,7 +72,7 @@ export default function SalesPage() {
         ]}
         visual={<AutomationFlow />}
         flip
-        className="border-t border-border bg-elevated"
+        className="ink ink-glow relative"
       />
 
       <FeatureRow

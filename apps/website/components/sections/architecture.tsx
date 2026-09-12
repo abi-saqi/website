@@ -16,6 +16,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { EASE } from "@/lib/motion";
 
 const layers = [
   {
@@ -130,7 +131,7 @@ export function Architecture() {
                     y: isRevealed ? 0 : 24,
                     scale: isActive ? 1.02 : 1,
                   }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.45, ease: EASE }}
                   className={cn(
                     "glass flex min-w-0 items-center gap-4 rounded-r px-5 py-4",
                     layer.highlight && "border-primary/50 ring-1 ring-primary/20",

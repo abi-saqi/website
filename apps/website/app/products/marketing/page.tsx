@@ -111,7 +111,7 @@ export default function MarketingPage() {
         ]}
         visual={<NudgeTimeline />}
         flip
-        className="border-t border-border bg-elevated"
+        className="ink ink-glow relative"
       />
 
       <FeatureRow

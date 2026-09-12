@@ -8,8 +8,10 @@ import { ArrowRight, CalendarCheck } from "lucide-react";
 export function CTA() {
   const { openDemo, openSales } = useLeadModal();
   return (
-    <section id="demo" className="relative overflow-hidden py-28 sm:py-36">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,var(--primary-soft),transparent)]" />
+    <section
+      id="demo"
+      className="ink ink-glow ink-grid relative overflow-hidden py-28 sm:py-32"
+    >
       <div className="mx-auto max-w-4xl px-6 sm:px-8">
         <Reveal>
           <div className="glass-strong rounded-r px-6 py-14 text-center sm:px-14 sm:py-16">

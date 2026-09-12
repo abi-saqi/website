@@ -10,6 +10,7 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { useLeadModal } from "@/components/providers/lead-modal-provider";
 import { PRODUCTS, NAV_LINKS } from "@/lib/nav";
 import { cn } from "@/lib/utils";
+import { EASE } from "@/lib/motion";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -63,7 +64,13 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "py-3" : "py-5"
+        scrolled ? "py-3" : "py-5",
+        // Every page opens on a dark hero band, so at the top of the page the
+        // transparent bar has to read against ink rather than against the
+        // light body it gets its tokens from. Once it lifts onto `glass` —
+        // scrolled, or with the Products panel open — the page behind it is
+        // light again and the normal theme applies.
+        !scrolled && !products && "on-ink"
       )}
     >
       <div
@@ -111,7 +118,7 @@ export function Navbar() {
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 4 }}
-                  transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.18, ease: EASE }}
                   // Solid, not glass: page content showing through a navigation
                   // menu reads as a rendering fault rather than a material.
                   className="absolute left-0 top-full mt-2 w-[34rem] rounded-r border border-border-strong bg-surface p-2 shadow-[0_16px_48px_-16px_rgba(24,43,33,0.28)]"
@@ -210,7 +217,7 @@ export function Navbar() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.25, ease: EASE }}
                   className="overflow-hidden"
                 >
                   <div className="flex flex-col gap-1 pb-1 pl-2">

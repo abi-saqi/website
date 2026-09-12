@@ -64,7 +64,7 @@ Header     Content-Type: application/json`}</code>
         </div>
       </section>
 
-      <section className="border-t border-border bg-elevated py-16 sm:py-20">
+      <section className="ink ink-glow relative py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6 sm:px-8">
           <SectionHeading
             align="left"

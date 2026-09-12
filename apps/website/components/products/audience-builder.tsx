@@ -1,7 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Megaphone, Target, ShoppingBag, MessageCircle, Filter } from "lucide-react";
+import { Filter } from "lucide-react";
+import {
+  ShopifyIcon,
+  WhatsAppIcon,
+  MetaIcon,
+  GoogleAdsIcon,
+} from "@/components/ui/brand-icons";
 
 const rules = [
   { field: "Source", op: "is any of", value: "Click-to-WhatsApp, Meta Ads" },
@@ -11,10 +17,15 @@ const rules = [
 ];
 
 const destinations = [
-  { icon: Megaphone, label: "Google Ads", chip: "bg-[#F59E0B]/14 text-[#B45309]", note: "Customer Match" },
-  { icon: Target, label: "Meta Ads", chip: "bg-[#0866FF]/12 text-[#0866FF]", note: "Custom Audience" },
-  { icon: ShoppingBag, label: "Shopify", chip: "bg-[#95BF47]/16 text-[#5E8E3E]", note: "Catalog segment" },
-  { icon: MessageCircle, label: "WhatsApp", chip: "bg-[#25D366]/14 text-[#1DA851]", note: "Campaign" },
+  {
+    icon: GoogleAdsIcon,
+    label: "Google Ads",
+    chip: "bg-[#4285F4]/12 text-[#4285F4]",
+    note: "Customer Match",
+  },
+  { icon: MetaIcon, label: "Meta Ads", chip: "bg-[#0467DF]/12 text-[#0467DF]", note: "Custom Audience" },
+  { icon: ShopifyIcon, label: "Shopify", chip: "bg-[#7AB55C]/14 text-[#5E8E3E]", note: "Catalog segment" },
+  { icon: WhatsAppIcon, label: "WhatsApp", chip: "bg-[#25D366]/14 text-[#1DA851]", note: "Campaign" },
 ];
 
 export function AudienceBuilder() {

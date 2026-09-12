@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { EASE } from "@/lib/motion";
 
 export function Accordion({
   items,
@@ -54,7 +55,7 @@ export function Accordion({
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.3, ease: EASE }}
                   className="overflow-hidden"
                 >
                   <p className="px-6 pb-5 text-sm leading-6 text-fg-muted">{item.answer}</p>

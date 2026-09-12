@@ -1,11 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingBag, Clock, MessageCircle, MessageSquareText, ShieldCheck } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Clock, ShieldCheck } from "lucide-react";
+import {
+  ShopifyIcon,
+  WhatsAppIcon,
+  GoogleMessagesIcon,
+  type IconComponent,
+} from "@/components/ui/brand-icons";
+import { EASE } from "@/lib/motion";
 
 type Step = {
-  icon: LucideIcon;
+  icon: IconComponent;
   chip: string;
   title: string;
   detail: string;
@@ -14,8 +20,8 @@ type Step = {
 
 const steps: Step[] = [
   {
-    icon: ShoppingBag,
-    chip: "bg-[#95BF47]/16 text-[#5E8E3E]",
+    icon: ShopifyIcon,
+    chip: "bg-[#7AB55C]/14 text-[#5E8E3E]",
     title: "Cart abandoned",
     detail: "Shopify webhook · ₹12,400 basket",
     tag: "Event",
@@ -35,15 +41,15 @@ const steps: Step[] = [
     tag: "Check",
   },
   {
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
     chip: "bg-[#25D366]/14 text-[#1DA851]",
     title: "WhatsApp nudge",
     detail: "Approved template with the basket contents",
     tag: "Send",
   },
   {
-    icon: MessageSquareText,
-    chip: "bg-[#06B6D4]/12 text-[#0891B2]",
+    icon: GoogleMessagesIcon,
+    chip: "bg-[#1A73E8]/12 text-[#1A73E8]",
     title: "RCS fallback",
     detail: "Only if unread after 24h — never both",
     tag: "Fallback",
@@ -70,7 +76,7 @@ export function NudgeTimeline() {
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-15%" }}
-            transition={{ duration: 0.45, delay: i * 0.09, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.45, delay: i * 0.09, ease: EASE }}
             className="flex items-center gap-3 rounded-r-sm border border-border bg-surface px-3 py-2.5"
           >
             <span
